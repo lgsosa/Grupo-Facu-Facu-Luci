@@ -38,4 +38,4 @@ class Usuarios (Resource):
         usuario = request.get_json()
         id = int(max(USUARIOS.keys()))+1
         USUARIOS[id] = usuario
-        return USUARIOS[id], 201
+        return USUARIOS[id], "recurso creado correctamente", 201

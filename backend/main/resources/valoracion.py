@@ -18,9 +18,9 @@ class Valoracion(Resource):
         id_libro = args['id_libro']
         valoracion = args['valoracion']
         valoraciones[id_libro] = valoracion
-        return {id_libro: valoraciones[id_libro]}, 201
+        return {id_libro: valoraciones[id_libro]}, "recurso creado correctamente",201
 
 
 class ValoracionAdmin(Resource):
     def get(self):
-        return valoraciones
+        return valoraciones 

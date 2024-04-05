@@ -35,4 +35,4 @@ class Prestamos (Resource):
         prestamo = request.get_json()
         id = int(max(PRESTAMOS.key())+1)
         PRESTAMOS[id] = prestamo
-        return PRESTAMOS[id], 201
+        return PRESTAMOS[id], 201, "recurso creado correctamente"
