@@ -24,24 +24,24 @@ def create_app():
 
     api.add_resource(resources.LibroResources, "/libro/<id>") #ruta
 
-    api.add_resource(resources.LoginResources, "/login<id>") #ruta
+    api.add_resource(resources.LoginResources, "/login/<id>") #ruta
 
-    api.add_resource(resources.Sign_inResources, "/sign_in") #ruta
+    api.add_resource(resources.Sign_inResources, "/signin") #ruta
 
     api.add_resource(resources.PrestamosResource, "/prestamos") #ruta
 
-    api.add_resource(resources.PrestamoResource, "/prestamo<id>") #ruta
+    api.add_resource(resources.PrestamoResource, "/prestamo/<id>") #ruta
 
-    api.add_resource(resources.NotificacionesResource, "/notificaciones") #ruta
+    api.add_resource(resources.NotificacionesResource, "/notificacion") #ruta
 
-    api.add_resource(resources.ConfiguracionResource, "/configuracion") #ruta
+    api.add_resource(resources.ConfiguracionResource, "/configuracion/<id>") #ruta
 
     api.add_resource(resources.ValoracionResource, "/valoracion") #ruta
 
-    api.add_resource(resources.ValoracionAdminResource, "/valoracion_admin") #ruta
+    api.add_resource(resources.ValoracionAdminResource, "/valoraciones") #ruta
 
     api.add_resource(resources.ComentarioResource, "/comentarios") #ruta
 
     api.init_app(app)
 
-    return app
+    return app  

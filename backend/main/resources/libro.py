@@ -2,7 +2,7 @@ from flask_restful import Resource
 from flask import request
 
 LIBROS = {
-    1:{"titulo":"","autor":"","genero":""},
+    1:{"titulo":"La casita","autor":"pepe","genero":"terror"},
     2:{"titulo":"","autor":"","genero":""}
 #los nros son los id
 }

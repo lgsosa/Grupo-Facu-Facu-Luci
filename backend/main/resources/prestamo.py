@@ -3,7 +3,8 @@ from flask import request
 from .usuario import USUARIOS
 
 PRESTAMOS = {
-    1: {"usuario":"", "cantidad":"","tiempo de devolucion":""}
+    1: {"usuario":"", "cantidad":"","tiempo de devolucion":""},
+    2: {"usuario":"", "cantidad":"","tiempo de devolucion":""}
  }
 
 class Prestamo (Resource):

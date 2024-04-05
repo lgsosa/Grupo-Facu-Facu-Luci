@@ -5,7 +5,7 @@ app = Flask(__name__)
 api = Api(app)
 
 # Base de datos simulada para las valoraciones
-valoraciones = {}
+valoraciones = {"valoracion":""}
 
 # Parser para las solicitudes POST
 parser = reqparse.RequestParser()
@@ -17,9 +17,9 @@ class Valoracion(Resource):
         args = parser.parse_args()
         id_libro = args['id_libro']
         valoracion = args['valoracion']
-        # Agregar la valoración a la base de datos simulada
         valoraciones[id_libro] = valoracion
-        return {'message': 'Valoración agregada correctamente'}, 201
+        return {id_libro: valoraciones[id_libro]}, 201
+
 
 class ValoracionAdmin(Resource):
     def get(self):

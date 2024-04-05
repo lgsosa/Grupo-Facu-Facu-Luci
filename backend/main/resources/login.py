@@ -3,15 +3,15 @@ from flask import request
 from .usuario import USUARIOS
 
 SIGN_IN ={
-    1: {"nombre":"","apellido":"","correo electronico":"","clave":""}
-
+    1: {"nombre":"","apellido":"","correo electronico":"","clave":""},
+    2: {"nombre":"","apellido":"","correo electronico":"","clave":""}
 }
 
     
 class Login(Resource):
     def put(self,id):
         if int(id) in USUARIOS:
-            usuarios = USUARIOS (int(id))
+            usuarios = USUARIOS [int(id)]
             data = request.get_json()
             usuarios.update(data)
             return "",201
