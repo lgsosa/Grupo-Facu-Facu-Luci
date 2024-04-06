@@ -1,2 +1,2 @@
 source bin/activate
-python3 app.py
+python3 backend/app.py
