@@ -11,7 +11,7 @@ class Comentario(Resource):
         if not comentarios:
             return jsonify({'message': 'No hay comentarios disponibles'}), 200
         return jsonify(comentarios), 200
-    
+
     def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument('libro_id', type=int, required=True, help='ID del libro es obligatorio')
@@ -22,5 +22,4 @@ class Comentario(Resource):
         comentario = args['comentario']
         
         comentarios[libro_id] = comentario
-        return jsonify({'message': 'Comentario agregado correctamente'}), 201
-
+        return {'message': 'Comentario agregado correctamente'}, 201

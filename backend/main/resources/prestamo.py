@@ -3,8 +3,8 @@ from flask import request
 from .usuario import USUARIOS
 
 PRESTAMOS = {
-    1: {"usuario":"", "cantidad":"","tiempo de devolucion":""},
-    2: {"usuario":"", "cantidad":"","tiempo de devolucion":""}
+    1: {"usuario":" Facundo Mesa ", "cantidad":" 2 ","tiempo de devolucion":" 15 dias "},
+    2: {"usuario":" Luciana Sosa ", "cantidad":" 1 ","tiempo de devolucion":" 5 dias "}
  }
 
 class Prestamo (Resource):
@@ -14,13 +14,14 @@ class Prestamo (Resource):
         
         return "No existe el id", 404
     
-    def put (self,id):
+    def put(self, id):
         if int(id) in PRESTAMOS:
-            del PRESTAMOS [int(id)]
-            return "",204
-        
-        return "No existe el id", 404
-    
+            animal = PRESTAMOS[int(id)]
+            data = request.get_json()
+            animal.update(data)
+            return ' Prestamo actualizado correctamente ', 201
+        return ' Error al crear "Prestamo" ', 404
+
     def delete (self,id):
         if int(id) in PRESTAMOS:
             del PRESTAMOS [int(id)]
@@ -31,8 +32,8 @@ class Prestamos (Resource):
     def get (self):
         return PRESTAMOS
     
-    def post (self):
-        prestamo = request.get_json()
-        id = int(max(PRESTAMOS.key())+1)
-        PRESTAMOS[id] = prestamo
-        return PRESTAMOS[id], 201, "recurso creado correctamente"
+    def post(self):
+        usuario = request.get_json()
+        id = int(max(PRESTAMOS.keys(), default=0)) + 1
+        PRESTAMOS[id] = usuario
+        return {'mensaje': 'El prestamo ha sido creado con éxito'}, 201
