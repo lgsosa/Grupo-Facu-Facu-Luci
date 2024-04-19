@@ -5,7 +5,7 @@ app = Flask(__name__)
 api = Api(app)
 
 # Base de datos simulada para las valoraciones
-valoraciones = {"valoracion":""}
+valoraciones = {}
 
 # Parser para las solicitudes POST
 parser = reqparse.RequestParser()
@@ -18,9 +18,10 @@ class Valoracion(Resource):
         id_libro = args['id_libro']
         valoracion = args['valoracion']
         valoraciones[id_libro] = valoracion
-        return {id_libro: valoraciones[id_libro]}, "Valoracion enviada",201
+        return {"id_libro": id_libro, "valoracion": valoracion}, 201
 
 
 class ValoracionAdmin(Resource):
     def get(self):
         return valoraciones 
+
