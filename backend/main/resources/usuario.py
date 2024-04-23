@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
 from flask_restful import Api, Resource
 import json
+from .. import db
+from main.models import UsuariosModel
 
 app = Flask(__name__)
 api = Api(app)
@@ -30,9 +32,13 @@ USUARIOS = {
 
 class Usuario(Resource):
     def get(self,id):
-        if int(id) in USUARIOS:
-            return USUARIOS[int(id)]
-        return "No existe el id", 404
+        usuario = db.session.query(UsuariosModel).get_or_404(id)
+        return usuario.to_json
+
+
+       # if int(id) in USUARIOS:
+        #    return USUARIOS[int(id)]
+        #return "No existe el id", 404
     
     def delete(self,id):
         if int(id) in USUARIOS:

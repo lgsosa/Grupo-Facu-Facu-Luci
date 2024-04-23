@@ -1,5 +1,8 @@
 from flask_restful import Resource
 from flask import request
+import json
+from .. import db
+from main.models import LibrosModel
 
 LIBROS = {
     1:{"titulo":" El guardian de la biblia del Diablo ","autor":" Richard Dubell ","genero":" misterio "},
@@ -14,10 +17,12 @@ LIBROS = {
 
 class Libro (Resource):
     def get(self,id):
-        if int(id) in LIBROS:
-            return LIBROS [int(id)]
+        libros = db.session.query(LibrosModel).get_or_404(id)
+        return libros.to_json
+        #if int(id) in LIBROS:
+        #    return LIBROS [int(id)]
         
-        return "No existe el id", 404
+        #return "No existe el id", 404
     
     def delete(self,id):
         if int(id) in LIBROS:

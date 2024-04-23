@@ -1,6 +1,8 @@
 from flask_restful import Resource
 from flask import request
 from .usuario import USUARIOS
+from .. import db
+from main.models import PrestamosModel
 
 PRESTAMOS = {
     1: {"usuario":" Facundo Mesa ", "cantidad":" 2 ","tiempo de devolucion":" 15 dias "},
@@ -9,10 +11,12 @@ PRESTAMOS = {
 
 class Prestamo (Resource):
     def get(self,id):
-        if int(id) in PRESTAMOS:
-            return PRESTAMOS [int(id)]
+        prestamos = db.session.query(PrestamosModel).get_or_404(id)
+        return prestamos.to_json
+     #   if int(id) in PRESTAMOS:
+      #      return PRESTAMOS [int(id)]
         
-        return "No existe el id", 404
+       # return "No existe el id", 404
     
     def put(self, id):
         if int(id) in PRESTAMOS:
