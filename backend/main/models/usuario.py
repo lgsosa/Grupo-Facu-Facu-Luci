@@ -2,9 +2,9 @@ from .. import db
 
 class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    nombre = db.Column(db.String(100), nullable = False)
-    telefono = db.Column(db.Integer, nullable=False)
-    correo_electronico = db.Column(db.String(100), nullable = False)
+    nombre = db.Column(db.String(100),nullable = False)
+    telefono = db.Column(db.Integer)
+    correo_electronico = db.Column(db.String(100),nullable = False)
 
 
     def to_json(self):
@@ -19,7 +19,6 @@ class Usuario(db.Model):
 
 
     @staticmethod 
-    # Convertir JSON a objeto Usuario
     def from_json(usuario_json):
         id = usuario_json.get('id')
         nombre = usuario_json.get('nombre y apellido')
