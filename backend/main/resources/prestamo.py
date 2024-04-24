@@ -19,13 +19,14 @@ class Prestamo (Resource):
        # return "No existe el id", 404
     
     # Modificar el recurso préstamo
+
     def put(self, id):
         prestamo = db.session.query(PrestamosModel).get_or_404(id)
         data = request.get_json()
         for key, value in data.items():
             setattr(prestamo, key, value)
         db.session.commit()
-        return 'Prestamo actualizado correctamente', 201
+        return {'mensaje': 'El prestamo ha sido editado con éxito', 'prestamo_modificado': prestamo.to_json()}, 201
 
     # Eliminar recurso préstamo
     def delete(self, id):

@@ -48,14 +48,14 @@ class Usuario(Resource):
         return ' Eliminado correctamente ', 204
 
     
-    # Modificar el recurso usuario
+    # Modificar el recurso libro
     def put(self, id):
         usuario = db.session.query(UsuariosModel).get_or_404(id)
         data = request.get_json()
         for key, value in data.items():
             setattr(usuario, key, value)
         db.session.commit()
-        return usuario.to_json(), 201
+        return {'mensaje': 'El usuario ha sido editado con éxito', 'usuario_modificado': usuario.to_json()}, 201
 
 
 class Usuarios(Resource):
