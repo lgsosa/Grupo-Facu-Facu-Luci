@@ -15,3 +15,14 @@ class Prestamos (db.Model):
             "tiempo_de_devolucion": self.tiempo_de_devolucion
         }   
         return prestamos_json
+    
+    @staticmethod
+    def from_json(prestamos_json):
+        id = prestamos_json.get('id')
+        usuario = prestamos_json.get('usuario')
+        cantidad = prestamos_json.get('cantidad')
+        tiempo_de_devolucion = prestamos_json.get('tiempo_de_devolucion')
+        return Prestamos(id=id,
+                         usuario=usuario,
+                         cantidad=cantidad,
+                         tiempo_de_devolucion=tiempo_de_devolucion)

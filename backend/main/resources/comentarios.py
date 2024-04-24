@@ -18,14 +18,9 @@ class Comentario(Resource):
         #    return jsonify({'message': 'No hay comentarios disponibles'}), 200
         #return jsonify(comentarios), 200
 
+    #insertar recurso
     def post(self):
-        parser = reqparse.RequestParser()
-        parser.add_argument('libro_id', type=int, required=True, help='ID del libro es obligatorio')
-        parser.add_argument('comentario', type=str, required=True, help='Comentario es obligatorio')
-        args = parser.parse_args()
-        
-        libro_id = args['libro_id']
-        comentario = args['comentario']
-        
-        comentarios[libro_id] = comentario
-        return {'message': 'Comentario agregado correctamente'}, 201
+        comentarios = ComentariosModel.from_json(request.get_json())
+        db.session.add(comentarios)
+        db.session.commit()
+        return comentarios.to_json(), 201

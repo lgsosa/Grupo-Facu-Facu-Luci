@@ -14,3 +14,14 @@ class Libros(db.Model):
             "genero": str(self.autor),
         }   
         return libros_json
+    
+    @staticmethod
+    def from_json(libro_json):
+        id = libro_json.get('id')
+        titulo = libro_json.get('titulo')
+        autor = libro_json.get('autor')
+        genero = libro_json.get('genero')
+        return Libros(id=id,
+                      titulo=titulo,
+                      autor=autor,
+                      genero=genero)

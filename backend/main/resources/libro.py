@@ -24,28 +24,31 @@ class Libro (Resource):
         
         #return "No existe el id", 404
     
-    def delete(self,id):
-        if int(id) in LIBROS:
-            del LIBROS [int(id)]
-            return "",204
-        
-        return "No existe el id", 404
+    # Eliminar recurso libro
+    def delete(self, id):
+        libro = db.session.query(LibrosModel).get_or_404(id)
+        db.session.delete(libro)
+        db.session.commit()
+        return ' Eliminado correctamente ', 204
+
     
+    # Modificar el recurso libro
     def put(self, id):
-        if int(id) in LIBROS:
-            libros_antes = LIBROS.copy()  # Hacer una copia de la lista de libros antes de la edición
-            libro = LIBROS[int(id)]
-            data = request.get_json()
-            libro.update(data)
-            return {'mensaje': 'El libro ha sido editado con éxito', 'libros_antes': libros_antes, 'libros_después': LIBROS}, 201
-        return "No existe el id", 404
+        libro = db.session.query(LibrosModel).get_or_404(id)
+        data = request.get_json()
+        for key, value in data.items():
+            setattr(libro, key, value)
+        db.session.commit()
+        return {'mensaje': 'El libro ha sido editado con éxito', 'libro_modificado': libro.to_json()}, 201
+
     
 class Libros (Resource):
     def get (self):
         return LIBROS
     
+    #insertar recurso
     def post(self):
-        usuario = request.get_json()
-        id = int(max(LIBROS.keys(), default=0)) + 1
-        LIBROS[id] = usuario
-        return {'mensaje': 'El libro ha sido añadido con éxito'}, 201
+        libro = LibrosModel.from_json(request.get_json())
+        db.session.add(libro)
+        db.session.commit()
+        return libro.to_json(), 201

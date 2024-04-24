@@ -13,3 +13,12 @@ class Valoracion(db.Model):
 
         }
         return prestamos_json
+    
+    @staticmethod
+    def from_json(valoracion_json):
+        id = valoracion_json.get('id')
+        nombre = valoracion_json.get('nombre_del_libro')
+        valoracion = valoracion_json.get('valoracion')
+        return Valoracion(id=id,
+                          nombre=nombre,
+                          valoracion=valoracion)

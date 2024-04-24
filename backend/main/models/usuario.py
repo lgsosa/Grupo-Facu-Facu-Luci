@@ -18,3 +18,15 @@ class Usuario(db.Model):
         return usuario_json
 
 
+    @staticmethod 
+    # Convertir JSON a objeto Usuario
+    def from_json(usuario_json):
+        id = usuario_json.get('id')
+        nombre = usuario_json.get('nombre y apellido')
+        telefono = usuario_json.get('telefono')
+        correo_electronico = usuario_json.get('correo electronico')
+        return Usuario(id=id,
+                    nombre=nombre,
+                    telefono=telefono,
+                    correo_electronico=correo_electronico)
+

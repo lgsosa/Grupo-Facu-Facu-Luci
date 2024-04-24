@@ -18,26 +18,30 @@ class Prestamo (Resource):
         
        # return "No existe el id", 404
     
+    # Modificar el recurso préstamo
     def put(self, id):
-        if int(id) in PRESTAMOS:
-            animal = PRESTAMOS[int(id)]
-            data = request.get_json()
-            animal.update(data)
-            return ' Prestamo actualizado correctamente ', 201
-        return ' Error al crear "Prestamo" ', 404
+        prestamo = db.session.query(PrestamosModel).get_or_404(id)
+        data = request.get_json()
+        for key, value in data.items():
+            setattr(prestamo, key, value)
+        db.session.commit()
+        return 'Prestamo actualizado correctamente', 201
 
-    def delete (self,id):
-        if int(id) in PRESTAMOS:
-            del PRESTAMOS [int(id)]
+    # Eliminar recurso préstamo
+    def delete(self, id):
+        prestamo = db.session.query(PrestamosModel).get_or_404(id)
+        db.session.delete(prestamo)
+        db.session.commit()
+        return ' Eliminado correctamente ', 204
 
-        return "No existe el id", 404
-    
+
 class Prestamos (Resource):
     def get (self):
         return PRESTAMOS
     
+    #insertar recurso
     def post(self):
-        usuario = request.get_json()
-        id = int(max(PRESTAMOS.keys(), default=0)) + 1
-        PRESTAMOS[id] = usuario
-        return {'mensaje': 'El prestamo ha sido creado con éxito'}, 201
+        prestamo = PrestamosModel.from_json(request.get_json())
+        db.session.add(prestamo)
+        db.session.commit()
+        return prestamo.to_json(), 201

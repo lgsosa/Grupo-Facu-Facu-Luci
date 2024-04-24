@@ -12,3 +12,12 @@ class Comentarios(db.Model):
             "comentario": str(self.comentarios),  # Convierte el comentario a cadena si es necesario
         }
         return comentario_json
+    
+    @staticmethod
+    def from_json(comentario_json):
+        id = comentario_json.get('id')
+        nombre = comentario_json.get('nombre')
+        comentarios = comentario_json.get('comentario')
+        return Comentarios(id=id,
+                           nombre=nombre,
+                           comentarios=comentarios)
