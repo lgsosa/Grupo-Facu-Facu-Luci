@@ -15,7 +15,7 @@ class Prestamos (db.Model):
             "tiempo_de_devolucion": self.tiempo_de_devolucion
         }   
         return prestamos_json
-    
+ #no funciona el put   
     @staticmethod
     def from_json(prestamos_json):
         id = prestamos_json.get('id')

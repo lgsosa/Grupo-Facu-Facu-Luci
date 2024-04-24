@@ -16,7 +16,7 @@ class Usuario(db.Model):
 
         }
         return usuario_json
-
+ #no funciona el put
 
     @staticmethod 
     def from_json(usuario_json):
