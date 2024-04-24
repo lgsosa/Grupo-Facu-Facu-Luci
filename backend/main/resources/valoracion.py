@@ -1,5 +1,8 @@
 from flask import Flask, request
 from flask_restful import Resource, Api, reqparse
+from .. import db
+from main.models import Valoraciones_Admin_Model
+import json
 
 app = Flask(__name__)
 api = Api(app)
@@ -23,5 +26,7 @@ class Valoracion(Resource):
 
 class ValoracionAdmin(Resource):
     def get(self):
-        return valoraciones 
+        valoraciones = db.session.query(Valoraciones_Admin_Model).get_or_404(id)
+        return valoraciones.to_json
+        #return valoraciones 
 

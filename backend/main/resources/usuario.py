@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
 from flask_restful import Api, Resource
 import json
+from .. import db
+from main.models import UsuariosModel
 
 app = Flask(__name__)
 api = Api(app)
@@ -30,31 +32,40 @@ USUARIOS = {
 
 class Usuario(Resource):
     def get(self,id):
-        if int(id) in USUARIOS:
-            return USUARIOS[int(id)]
-        return "No existe el id", 404
+        usuario = db.session.query(UsuariosModel).get_or_404(id)
+        return usuario.to_json
+
+
+       # if int(id) in USUARIOS:
+        #    return USUARIOS[int(id)]
+        #return "No existe el id", 404
     
-    def delete(self,id):
-        if int(id) in USUARIOS:
-            del USUARIOS[int(id)]
-            return "Usuario Eliminado", 204
-        return "No existe el id", 404
+    # Eliminar recurso usuario
+    def delete(self, id):
+        usuario = db.session.query(UsuariosModel).get_or_404(id)
+        db.session.delete(usuario)
+        db.session.commit()
+        return ' Eliminado correctamente ', 204
+
     
+    # Modificar el recurso usuario
     def put(self, id):
-        if int(id) in USUARIOS:
-            usuario = USUARIOS[int(id)]
-            data = request.get_json()
-            usuario.update(data)
-            return ' Usuario actualizado correctamente', 201
-        return '', 404
+        usuario = db.session.query(UsuariosModel).get_or_404(id)
+        data = request.get_json()
+        for key, value in data.items():
+            setattr(usuario, key, value)
+        db.session.commit()
+        return usuario.to_json(), 201
+
 
 class Usuarios(Resource):
     def get(self):
         return USUARIOS
     
+    #insertar recurso
     def post(self):
-        usuario = request.get_json()
-        id = int(max(USUARIOS.keys(), default=0)) + 1
-        USUARIOS[id] = usuario
-        return {'mensaje': 'El animal ha sido creado con éxito'}, 201
+        usuario = UsuariosModel.from_json(request.get_json())
+        db.session.add(usuario)
+        db.session.commit()
+        return usuario.to_json(), 201
 
