@@ -17,4 +17,5 @@ app.app_context().push()
 from main import db
 if __name__ == '__main__':
     db.create_all()
-    app.run(debug=True,port=os.getenv('PORT'))
+    port = os.getenv('PORT', 5000)  # Si no se ha configurado PORT, se usará el puerto 5001 por defecto
+    app.run(debug=True, port=port)

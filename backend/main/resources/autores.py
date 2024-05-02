@@ -38,8 +38,9 @@ class Autores(Resource):
     def get(self):
         return AUTORES
     
+    #insertar recurso
     def post(self):
-        autor = AutoresModel.from_json(request.get_json())
-        db.session.add(autor)
+        usuario = AutoresModel.from_json(request.get_json())
+        db.session.add(usuario)
         db.session.commit()
-        return autor.to_json(), 201
+        return usuario.to_json(), 201

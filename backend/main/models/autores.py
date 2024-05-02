@@ -1,9 +1,14 @@
 from .. import db
 
 class Autores(db.Model):
+
+    __tableusuario__= "autores"
+
     id = db.Column(db.Integer, primary_key=True)
     autor = db.Column(db.String(100), nullable=False)
     libros_titulo = db.Column(db.String(100), nullable=False)
+
+    libros = db.relationship("Libros", secondary = "libros_autores", back_populates="autores")
 
     def to_json(self):
         autores_json = {
@@ -21,3 +26,12 @@ class Autores(db.Model):
         return Autores(id=id,
                                 autor=autor,
                                 libros_titulo=libros_titulo)
+
+libros_autores = db.Table(
+    "libros_autores",
+
+    db.Column("libros_id", db.Integer, db.ForeignKey("libros.id")),
+    db.Column ("autores_id", db.Integer, db.ForeignKey("autores.id"))
+
+
+)
