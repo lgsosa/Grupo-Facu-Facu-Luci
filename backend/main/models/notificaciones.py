@@ -3,10 +3,22 @@ from .. import db
 class Notificaciones (db.Model):
     id = db.Column(db.Integer, primary_key=True)
     notificacion  = db.Column(db.String(100), nullable = False)
+    #clave foranea
+    id_usuario = db.Column(db.Integer, db.ForeignKey("usuario.id"), nullable=False)
 
+    #nombre de la relacion
+    usuario = db.relationship("Usuario", back_populates="notificaciones", uselist = False, single_parent =True)
 
 
     def to_json(self):
+        notificaciones_json = {
+            "id": self.id,
+            "notificacion": self.notificacion,
+            "usuario": self.usuario.to_json()
+        }   
+        return notificaciones_json
+    
+    def to_json_short(self):
         notificaciones_json = {
             "id": self.id,
             "notificacion": self.notificacion

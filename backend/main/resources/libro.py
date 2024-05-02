@@ -4,6 +4,7 @@ import json
 from .. import db
 from main.models import LibrosModel
 
+
 LIBROS = {
     1:{"titulo":" El guardian de la biblia del Diablo ","autor":" Richard Dubell ","genero":" misterio "},
     2:{"titulo":" El club de los psicopatas ","autor":" John Katzenbach","genero":" terror psicologico "},
@@ -17,8 +18,8 @@ LIBROS = {
 
 class Libro (Resource):
     def get(self,id):
-        libros = db.session.query(LibrosModel).get_or_404(id)
-        return libros.to_json
+        libro = db.session.query(LibrosModel).get_or_404(id)
+        return libro.to_json_complete()
         #if int(id) in LIBROS:
         #    return LIBROS [int(id)]
         

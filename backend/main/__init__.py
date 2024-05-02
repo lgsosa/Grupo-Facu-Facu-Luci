@@ -36,9 +36,9 @@ def create_app():
 
     api.add_resource(resources.UsuarioResources, "/usuario/<id>")#ruta
 
-    api.add_resource(resources.LibrosResources, "/libros") #ruta
-
     api.add_resource(resources.LibroResources, "/libro/<id>") #ruta
+
+    api.add_resource(resources.LibrosResources, "/libros") #ruta
 
     api.add_resource(resources.LoginResources, "/login/<id>") #ruta
 
@@ -57,6 +57,13 @@ def create_app():
     api.add_resource(resources.ValoracionAdminResource, "/valoraciones") #ruta
 
     api.add_resource(resources.ComentarioResource, "/comentarios") #ruta
+
+    api.add_resource(resources.AutoresResource, "/autores") #ruta
+
+    api.add_resource(resources.AutorResource, "/autor/<id>") #ruta
+
+    api.add_resource(resources.ReseñasResource, "/reseñas/<id>") #ruta
+
 
     api.init_app(app)
 

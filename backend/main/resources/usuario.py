@@ -33,7 +33,7 @@ USUARIOS = {
 class Usuario(Resource):
     def get(self,id):
         usuario = db.session.query(UsuariosModel).get_or_404(id)
-        return usuario.to_json
+        return usuario.to_json_complete()
 
 
        # if int(id) in USUARIOS:

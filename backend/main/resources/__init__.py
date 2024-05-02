@@ -11,3 +11,6 @@ from .configuracion import Configuracion as ConfiguracionResource
 from .valoracion import Valoracion as ValoracionResource
 from .valoracion import ValoracionAdmin as ValoracionAdminResource
 from .comentarios import Comentario as ComentarioResource
+from .autores import Autor as AutorResource
+from .autores import Autores as AutoresResource
+from .reseñas import Reseñas as ReseñasResource

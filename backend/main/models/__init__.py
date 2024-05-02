@@ -5,3 +5,4 @@ from .prestamos import Prestamos as PrestamosModel
 from .valoracion import Valoracion as Valoraciones_Admin_Model
 from .notificaciones import Notificaciones as NotificacionesModel
 from .autores import Autores as AutoresModel
+from .reseñas import Reseñas as ReseñasModel
