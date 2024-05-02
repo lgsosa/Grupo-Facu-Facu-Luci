@@ -15,7 +15,7 @@ AUTORES = {
 class Autor(Resource):
     def get(self, id):
         autor = db.session.query(AutoresModel).get_or_404(id)
-        return autor.to_json
+        return autor.to_json()
         # if int(id) in AUTORES:
         #     return AUTORES[int(id)]
         # return "No existe el id", 404
