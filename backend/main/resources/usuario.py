@@ -60,7 +60,9 @@ class Usuario(Resource):
 
 class Usuarios(Resource):
     def get(self):
-        return USUARIOS
+            usuarios = UsuariosModel.query.all()
+            usuarios_json = [usuario.to_json() for usuario in usuarios]
+            return usuarios_json
     
     #insertar recurso
     def post(self):
