@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3dac9ccf-5d2b-4c16-bd46-6072af2abb05",
+		"_postman_id": "b426ca56-0d25-4289-8a83-3f64dac8cb00",
 		"name": "Grupo D",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "33883929"
@@ -37,7 +37,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/usuario/1",
+							"raw": "http://127.0.0.1:5000/usuario/2",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -48,7 +48,7 @@
 							"port": "5000",
 							"path": [
 								"usuario",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -59,6 +59,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre y apellido\": \"Nombre Apellido\",\n    \"telefono\": 123456789,\n    \"correo electronico\": \"correo@example.com\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://127.0.0.1:5000/usuarios",
 							"protocol": "http",
@@ -81,6 +90,15 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre y apellido\": \"Nombre Apellido\",\n    \"telefono\": 123456789,\n    \"correo electronico\": \"correo@example.com\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://127.0.0.1:5000/usuario/1",
 							"protocol": "http",
@@ -104,8 +122,17 @@
 					"request": {
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre y apellido\": \"Nombre Apellido\",\n    \"telefono\": 123456789,\n    \"correo electronico\": \"correo@example.com\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://127.0.0.1:5000/usuario/1",
+							"raw": "http://127.0.0.1:5000/usuario/4",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -116,7 +143,7 @@
 							"port": "5000",
 							"path": [
 								"usuario",
-								"1"
+								"4"
 							]
 						}
 					},
@@ -150,10 +177,42 @@
 					"response": []
 				},
 				{
+					"name": "Libro",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/libro/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"libro",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Crear libro",
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"titulo\": \"Título del libro\",\n    \"autor\": \"Nombre del autor\",\n    \"genero\": \"Género del libro\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://127.0.0.1:5000/libros",
 							"protocol": "http",
@@ -172,33 +231,19 @@
 					"response": []
 				},
 				{
-					"name": "Libro",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:5000/libro/1",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "5000",
-							"path": [
-								"libro",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Eliminar libro",
 					"request": {
 						"method": "DELETE",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"titulo\": \"Título del libro\",\n    \"autor\": \"Nombre del autor\",\n    \"genero\": \"Género del libro\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://127.0.0.1:5000/libro/1",
 							"protocol": "http",
@@ -222,8 +267,17 @@
 					"request": {
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"titulo\": \"Título del libro\",\n    \"autor\": \"Nombre del autor\",\n    \"genero\": \"Género del libro\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://127.0.0.1:5000/libro/1",
+							"raw": "http://127.0.0.1:5000/libro/3",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -234,7 +288,7 @@
 							"port": "5000",
 							"path": [
 								"libro",
-								"1"
+								"3"
 							]
 						}
 					},
@@ -296,28 +350,6 @@
 			"name": "Prestamos",
 			"item": [
 				{
-					"name": "Crear prestamo",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:5000/prestamos",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "5000",
-							"path": [
-								"prestamos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Lista de prestamos",
 					"request": {
 						"method": "GET",
@@ -363,10 +395,50 @@
 					"response": []
 				},
 				{
+					"name": "Crear prestamo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"usuario_id\": 1,\n    \"libro_id\": 1,\n    \"cantidad\": 1,\n    \"tiempo_de_devolucion\": 7\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/prestamos",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"prestamos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Actualizar prestamo",
 					"request": {
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"usuario_id\": 1,\n    \"libro_id\": 1,\n    \"cantidad\": 1,\n    \"tiempo_de_devolucion\": 7\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://127.0.0.1:5000/prestamo/1",
 							"protocol": "http",
@@ -390,6 +462,15 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"usuario_id\": 1,\n    \"libro_id\": 1,\n    \"cantidad\": 1,\n    \"tiempo_de_devolucion\": 7\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://127.0.0.1:5000/prestamo/1",
 							"protocol": "http",
@@ -418,6 +499,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id_usuario\": 1,\n    \"notificacion\": \"Contenido de la notificación\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://127.0.0.1:5000/notificacion",
 							"protocol": "http",
@@ -468,6 +558,15 @@
 					"request": {
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n            \"libros\": \"\",\n            \"notificaciones\": \"\", \n            \"prestamos\": \"\", \n            \"valoracion \": 5\n        }   ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://127.0.0.1:5000/configuracion/1",
 							"protocol": "http",
@@ -492,28 +591,6 @@
 			"name": "Valoraciones",
 			"item": [
 				{
-					"name": "Valoracion",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:5000/valoracion",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "5000",
-							"path": [
-								"valoracion"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Lista de valoraciones",
 					"request": {
 						"method": "GET",
@@ -530,6 +607,37 @@
 							"port": "5000",
 							"path": [
 								"valoraciones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Valoracion",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"nombre_del_libro\": \"El nombre del libro\",\n    \"valoracion\": 5\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/valoracion",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"valoracion"
 							]
 						}
 					},
@@ -567,6 +675,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"nombre\": \"Juan\",\n    \"comentario\": \"Este libro me pareció muy interesante. Lo recomiendo a todos.\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://127.0.0.1:5000/comentarios",
 							"protocol": "http",
