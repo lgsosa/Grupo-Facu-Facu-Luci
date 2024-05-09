@@ -68,27 +68,30 @@ class Usuarios(Resource):
         per_page = 10
         
         # No ejecuto el .all()
-        usuarios = db.session.query(UsuariosModel)
+        usuarios_query = db.session.query(UsuariosModel)
         
         if request.args.get('page'):
             page = int(request.args.get('page'))
         if request.args.get('per_page'):
             per_page = int(request.args.get('per_page'))
-        
-        ### FILTROS ###
-
-        if request.args.get('usuario_reseñas'):
-            usuarios = usuarios.outerjoin(UsuariosModel.historias).group_by(UsuariosModel.id).having(func.count(usuario_reseñas.id) >= int(request.args.get('usuario_reseñas')))
-
+       
+        # Aplicar filtro si se proporciona el parámetro en la consulta
+        if request.args.get('prestamos'):
+            usuarios_query = usuarios_query.filter(UsuariosModel.prestamos != None)
+        if request.args.get('notificaciones'):
+            usuarios_query = usuarios_query.filter(UsuariosModel.notificaciones != None)
+        if request.args.get('reseñas'):
+            usuarios_query = usuarios_query.filter(UsuariosModel.reseñas != None)
         
         # Obtener valor paginado
-        usuarios = usuarios.paginate(page=page, per_page=per_page, error_out=True)
+        usuarios = usuarios_query.paginate(page=page, per_page=per_page, error_out=True)
 
         return jsonify({'usuarios': [usuario.to_json() for usuario in usuarios],
                         'total': usuarios.total,
                         'pages': usuarios.pages,
                         'page': page
                         })
+
 
     
     #insertar recurso
