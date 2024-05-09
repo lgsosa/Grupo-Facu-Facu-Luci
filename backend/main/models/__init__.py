@@ -6,3 +6,4 @@ from .valoracion import Valoracion as Valoraciones_Admin_Model
 from .notificaciones import Notificaciones as NotificacionesModel
 from .autores import Autores as AutoresModel
 from .reseñas import Reseñas as ReseñasModel
+from .configuracion import Configuracion as ConfiguracionModel

@@ -11,8 +11,28 @@ comentarios = {}
  
 class Comentario(Resource):
     def get(self):
-        comentarios = db.session.query(ComentariosModel).get_or_404(id)
-        return comentarios.to_json
+        # Página inicial por defecto
+        page = 1
+        # Cantidad de elementos por página por defecto
+        per_page = 10
+        
+        # No ejecuto el .all()
+        usuarios = db.session.query(ComentariosModel)
+        
+        if request.args.get('page'):
+            page = int(request.args.get('page'))
+        if request.args.get('per_page'):
+            per_page = int(request.args.get('per_page'))
+
+        
+        # Obtener valor paginado
+        usuarios = usuarios.paginate(page=page, per_page=per_page, error_out=True)
+
+        return jsonify({'usuarios': [usuario.to_json() for usuario in usuarios],
+                        'total': usuarios.total,
+                        'pages': usuarios.pages,
+                        'page': page
+                        })
 
         #if not comentarios:
         #    return jsonify({'message': 'No hay comentarios disponibles'}), 200

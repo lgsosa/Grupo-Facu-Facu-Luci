@@ -377,7 +377,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/prestamo/1",
+							"raw": "http://127.0.0.1:5000/prestamo/2",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -388,7 +388,7 @@
 							"port": "5000",
 							"path": [
 								"prestamo",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -401,7 +401,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"usuario_id\": 1,\n    \"libro_id\": 1,\n    \"cantidad\": 1,\n    \"tiempo_de_devolucion\": 7\n}\n",
+							"raw": "{\n            \"id\": 2,\n            \"usuario\": \"Pepe\",\n            \"cantidad\": 7,\n            \"tiempo_de_devolucion\": 5\n    }\n\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -508,6 +508,28 @@
 								}
 							}
 						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/notificacion",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"notificacion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Notifiicaciones",
+					"request": {
+						"method": "GET",
+						"header": [],
 						"url": {
 							"raw": "http://127.0.0.1:5000/notificacion",
 							"protocol": "http",
@@ -707,7 +729,7 @@
 			"name": "Reseñas",
 			"item": [
 				{
-					"name": "http://127.0.0.1:5000/reseñas/1",
+					"name": "Reseñas",
 					"request": {
 						"method": "GET",
 						"header": [],

@@ -1,5 +1,5 @@
 from flask_restful import Resource
-from flask import request
+from flask import request,jsonify
 from .. import db
 from main.models import AutoresModel
 
@@ -36,7 +36,28 @@ class Autor(Resource):
 
 class Autores(Resource):
     def get(self):
-        return AUTORES
+        # Página inicial por defecto
+        page = 1
+        # Cantidad de elementos por página por defecto
+        per_page = 10
+        
+        # No ejecuto el .all()
+        usuarios = db.session.query(AutoresModel)
+        
+        if request.args.get('page'):
+            page = int(request.args.get('page'))
+        if request.args.get('per_page'):
+            per_page = int(request.args.get('per_page'))
+
+        
+        # Obtener valor paginado
+        usuarios = usuarios.paginate(page=page, per_page=per_page, error_out=True)
+
+        return jsonify({'usuarios': [usuario.to_json() for usuario in usuarios],
+                        'total': usuarios.total,
+                        'pages': usuarios.pages,
+                        'page': page
+                        })
     
     #insertar recurso
     def post(self):
