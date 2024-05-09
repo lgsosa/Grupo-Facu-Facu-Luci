@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request,jsonify
 from flask_restful import Resource, Api, reqparse
 from .. import db
 from main.models import Valoraciones_Admin_Model
@@ -26,7 +26,26 @@ class Valoracion(Resource):
 
 class ValoracionAdmin(Resource):
     def get(self):
-        valoraciones = db.session.query(Valoraciones_Admin_Model).get_or_404(id)
-        return valoraciones.to_json
-        #return valoraciones 
+        # Página inicial por defecto
+        page = 1
+        # Cantidad de elementos por página por defecto
+        per_page = 10
+        
+        # No ejecuto el .all()
+        usuarios = db.session.query(Valoraciones_Admin_Model)
+        
+        if request.args.get('page'):
+            page = int(request.args.get('page'))
+        if request.args.get('per_page'):
+            per_page = int(request.args.get('per_page'))
+
+        
+        # Obtener valor paginado
+        usuarios = usuarios.paginate(page=page, per_page=per_page, error_out=True)
+
+        return jsonify({'usuarios': [usuario.to_json() for usuario in usuarios],
+                        'total': usuarios.total,
+                        'pages': usuarios.pages,
+                        'page': page
+                        })
 

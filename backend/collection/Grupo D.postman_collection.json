@@ -32,7 +32,7 @@
 					"response": []
 				},
 				{
-					"name": "Usuario",
+					"name": "Ver Usuriao",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -177,7 +177,7 @@
 					"response": []
 				},
 				{
-					"name": "Libro",
+					"name": "Ver Libro",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -245,7 +245,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:5000/libro/1",
+							"raw": "http://127.0.0.1:5000/libro/3",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -256,7 +256,7 @@
 							"port": "5000",
 							"path": [
 								"libro",
-								"1"
+								"3"
 							]
 						}
 					},
@@ -372,12 +372,12 @@
 					"response": []
 				},
 				{
-					"name": "Prestamo",
+					"name": "Ver Prestamo",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/prestamo/1",
+							"raw": "http://127.0.0.1:5000/prestamo/2",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -388,7 +388,7 @@
 							"port": "5000",
 							"path": [
 								"prestamo",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -401,7 +401,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"usuario_id\": 1,\n    \"libro_id\": 1,\n    \"cantidad\": 1,\n    \"tiempo_de_devolucion\": 7\n}\n",
+							"raw": "{\n            \"id\": 2,\n            \"usuario\": \"Pepe\",\n            \"cantidad\": 7,\n            \"tiempo_de_devolucion\": 5\n    }\n\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -508,6 +508,28 @@
 								}
 							}
 						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/notificacion",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"notificacion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Notifiicaciones",
+					"request": {
+						"method": "GET",
+						"header": [],
 						"url": {
 							"raw": "http://127.0.0.1:5000/notificacion",
 							"protocol": "http",
@@ -696,6 +718,84 @@
 							"port": "5000",
 							"path": [
 								"comentarios"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reseñas",
+			"item": [
+				{
+					"name": "Reseñas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/reseñas/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"reseñas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Autores",
+			"item": [
+				{
+					"name": "Lista de autores",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/autores",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"autores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Autor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/autor/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"autor",
+								"1"
 							]
 						}
 					},
