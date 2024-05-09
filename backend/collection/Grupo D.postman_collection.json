@@ -15,7 +15,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/usuarios",
+							"raw": "http://127.0.0.1:5000/usuarios?notificaciones=1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -26,6 +26,12 @@
 							"port": "5000",
 							"path": [
 								"usuarios"
+							],
+							"query": [
+								{
+									"key": "notificaciones",
+									"value": "1"
+								}
 							]
 						}
 					},
