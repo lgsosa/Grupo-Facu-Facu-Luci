@@ -13,7 +13,7 @@ PRESTAMOS = {
 class Prestamo (Resource):
     def get(self,id):
         prestamos = db.session.query(PrestamosModel).get_or_404(id)
-        return prestamos.to_json_short()
+        return prestamos.to_json()
      #   if int(id) in PRESTAMOS:
       #      return PRESTAMOS [int(id)]
         
@@ -45,7 +45,7 @@ class Prestamos (Resource):
         per_page = 10
         
         # No ejecuto el .all()
-        usuarios = db.session.query(PrestamosModel)
+        usuarios_execute = db.session.query(PrestamosModel)
         
         if request.args.get('page'):
             page = int(request.args.get('page'))
@@ -54,7 +54,7 @@ class Prestamos (Resource):
 
         
         # Obtener valor paginado
-        usuarios = usuarios.paginate(page=page, per_page=per_page, error_out=True)
+        usuarios = usuarios_execute.paginate(page=page, per_page=per_page, error_out=True)
 
         return jsonify({'usuarios': [usuario.to_json() for usuario in usuarios],
                         'total': usuarios.total,
