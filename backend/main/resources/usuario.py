@@ -94,7 +94,7 @@ class Usuarios(Resource):
 
 
     
-    #insertar recurso
+    #insertar recurso-
     def post(self):
         usuario = UsuariosModel.from_json(request.get_json())
         db.session.add(usuario)
