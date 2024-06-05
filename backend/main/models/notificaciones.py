@@ -6,7 +6,7 @@ class Notificaciones (db.Model):
     #clave foranea
     id_usuario = db.Column(db.Integer, db.ForeignKey("usuario.id"), nullable=False)
 
-    #nombre de la relacion
+    #nombre de la relaciones
     usuario = db.relationship("Usuario", back_populates="notificaciones")
 
 
