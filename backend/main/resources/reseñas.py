@@ -7,11 +7,13 @@ from flask import Flask, request, jsonify
 from main.models.reseñas import usuario_reseñas
 from flask_restful import Resource
 from sqlalchemy import func, desc
+from flask_jwt_extended import jwt_required
 
 class Reseñas (Resource):
+    @jwt_required(optional=True)
     def get(self, id):
 
-                # Página inicial por defecto
+        # Página inicial por defecto
         page = 1
         # Cantidad de elementos por página por defecto
         per_page = 10
