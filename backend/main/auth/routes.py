@@ -2,6 +2,8 @@ from flask import request, jsonify, Blueprint
 from .. import db
 from main.models import UsuariosModel
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
+#Importar funcion de envío de mail
+from main.mail.functions import sendMail
 
 #Blueprint para acceder a los métodos de autenticación
 auth = Blueprint('auth', __name__, url_prefix='/auth')
@@ -27,21 +29,22 @@ def login():
     else:
         return 'Incorrect password', 401
 
-#Método de registro
+# Método de registro
 @auth.route('/register', methods=['POST'])
 def register():
-    # Obtener animal
+    # Obtener usuario
     usuario = UsuariosModel.from_json(request.get_json())
-    # Verificar si el mail ya existe en la db, scalar() para saber la cantidad de ese email
+    # Verificar si el correo electrónico ya existe en la base de datos
     exists = db.session.query(UsuariosModel).filter(UsuariosModel.correo_electronico == usuario.correo_electronico).scalar() is not None
-    print("¿Correo electrónico existente?", exists)
     if exists:
-        return 'msg: The email is duplicate', 409
+        return 'Duplicated email', 409
     else:
         try:
-            # Agregar animal a DB
+            # Agregar usuario a la base de datos
             db.session.add(usuario)
             db.session.commit()
+            # Enviar correo de bienvenida
+            send = sendMail([usuario.correo_electronico], "Welcome!", 'register', usuario=usuario)
         except Exception as error:
             db.session.rollback()
             return str(error), 409

@@ -8,7 +8,7 @@ class Notificaciones(db.Model):
     id_usuario = db.Column(db.Integer, db.ForeignKey("usuario.id"), nullable=False)
 
     # Nombre de la relación
-    usuario = db.relationship("Usuario", back_populates="notificaciones", uselist=False, single_parent=True)
+    usuario = db.relationship("Usuario", back_populates="notificaciones")
 
     def to_json_short(self):
         notificaciones_json = {

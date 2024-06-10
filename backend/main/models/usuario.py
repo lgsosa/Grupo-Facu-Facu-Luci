@@ -1,4 +1,4 @@
-from .. import db 
+from .. import db
 from werkzeug.security import generate_password_hash, check_password_hash #importo estas 2 funciones para la pass
 
 class Usuario(db.Model):

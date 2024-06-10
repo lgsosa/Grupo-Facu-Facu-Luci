@@ -1,11 +1,12 @@
 from .. import db
+from datetime import datetime
 
 class Prestamos (db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre_usuario  = db.Column(db.String(100), nullable = False)
     cantidad = db.Column(db.Integer, nullable=False)
     tiempo_de_devolucion = db.Column(db.Integer, nullable=False)
-
+    fecha_inicio = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)  # Nuevo campo
     #clave foranea
 
     id_usuario = db.Column(db.Integer, db.ForeignKey("usuario.id"), nullable=False)

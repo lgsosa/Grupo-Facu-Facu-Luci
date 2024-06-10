@@ -4,7 +4,9 @@ from .. import db
 from main.models import PrestamosModel
 from flask_jwt_extended import jwt_required
 from main.auth.decorators import role_required
-
+from main.mail.functions import sendMail
+from main.models import UsuariosModel
+from flask import render_template
 
 class Prestamo (Resource):
     @jwt_required(optional=True)
@@ -17,7 +19,7 @@ class Prestamo (Resource):
        # return "No existe el id", 404
     
     # Modificar el recurso préstamo
-    @role_required(roles = ["admin"])
+    @role_required(roles = ["admin", "bibliotecario"])
     def put(self, id):
         prestamo = db.session.query(PrestamosModel).get_or_404(id)
         data = request.get_json()
@@ -27,7 +29,7 @@ class Prestamo (Resource):
         return {'mensaje': 'El prestamo ha sido editado con éxito', 'prestamo_modificado': prestamo.to_json()}, 201
 
     # Eliminar recurso préstamo
-    @role_required(roles = ["admin"])
+    @role_required(roles = ["admin", "bibliotecario"])
     def delete(self, id):
         prestamo = db.session.query(PrestamosModel).get_or_404(id)
         db.session.delete(prestamo)
@@ -60,15 +62,17 @@ class Prestamos (Resource):
                         'pages': usuarios.pages,
                         'page': page
                         })
-    
+        
+
+
     #insertar recurso
-    @role_required(roles=["admin"])
+    @role_required(roles=["admin", "bibliotecario"])
     def post(self):
         data = request.get_json()
         print(data)  # Verificar los datos recibidos
 
         # Verificar que los campos necesarios existan en los datos JSON
-        required_fields = ['nombre_usuario', 'cantidad', 'tiempo_de_devolucion', 'id_usuario', 'id_libro']
+        required_fields = ['nombre_usuario', 'cantidad', 'tiempo_de_devolucion', 'id_usuario', 'id_libro', 'correo_electronico']
         for field in required_fields:
             if field not in data:
                 return {'message': f'{field} is required'}, 400
@@ -76,6 +80,19 @@ class Prestamos (Resource):
         prestamo = PrestamosModel.from_json(data)
         db.session.add(prestamo)
         db.session.commit()
+        
+        # Enviar correo de notificación
+        try:
+            usuario = UsuariosModel.query.get(prestamo.id_usuario)
+            if usuario:
+                correo_electronico = usuario.correo_electronico
+                send = sendMail([correo_electronico], "Prestamo", 'prestamo', usuario=usuario)
+        except Exception as error:
+            db.session.rollback()
+            return str(error), 409
+
         return prestamo.to_json(), 201
+
+
     
 

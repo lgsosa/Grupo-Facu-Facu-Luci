@@ -6,6 +6,9 @@ import os
 from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
 
+
+#importar Flask Mail
+from flask_mail import Mail
 #importar Flask JWT
 #iniciamos restful
 
@@ -20,6 +23,8 @@ migrate = Migrate()
 #Inicializar JWT
 jwt = JWTManager()
 
+#Inicializar 
+mailsender = Mail()
 
 #este metodo create_app inicializa la app y todos los modulos
 
@@ -84,4 +89,17 @@ def create_app():
     from main.auth import routes
     #Import blueprint
     app.register_blueprint(routes.auth)
+
+    # Configuración de mail
+    app.config['MAIL_HOSTNAME'] = os.getenv('MAIL_HOSTNAME')
+    app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
+    app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT'))  # Convertir a entero
+    app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS') == 'True'  # Convertir a booleano
+    app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+    app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+    app.config['FLASKY_MAIL_SENDER'] = os.getenv('FLASKY_MAIL_SENDER')
+    app.config['MAIL_TEMPLATE_FOLDER'] = 'templates'  # Directorio de plantillas
+    #Inicializar en app
+    mailsender.init_app(app)
+
     return app  
