@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from flask_restful import Api, Resource
+from flask_restful import Api, Resource, abort
 import json
 from .. import db
 from main.models import UsuariosModel
@@ -8,14 +8,13 @@ from sqlalchemy import func, desc
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from main.auth.decorators import role_required
 
-
 app = Flask(__name__)
 api = Api(app)
 
 
 class Usuario(Resource):
     #obtener recurso
-    @role_required(roles = ["admin"])
+    @role_required(roles=["admin", "bibliotecario"])
     def get(self,id):
         usuario = db.session.query(UsuariosModel).get_or_404(id)
         current_identity = get_jwt_identity()
@@ -24,23 +23,16 @@ class Usuario(Resource):
         else:
             return usuario.to_json()
 
-
-
-       # if int(id) in USUARIOS:
-        #    return USUARIOS[int(id)]
-        #return "No existe el id", 404
-    
     # Eliminar recurso usuario
-    @role_required(roles = ["admin"])
+    @role_required(roles=["admin"])
     def delete(self, id):
         usuario = db.session.query(UsuariosModel).get_or_404(id)
         db.session.delete(usuario)
         db.session.commit()
         return ' Eliminado correctamente ', 204
-
     
     # Modificar el recurso usuario
-    @role_required(roles = ["admin"])
+    @role_required(roles=["admin", "bibliotecario"])
     def put(self, id):
         usuario = db.session.query(UsuariosModel).get_or_404(id)
         data = request.get_json()
@@ -49,9 +41,8 @@ class Usuario(Resource):
         db.session.commit()
         return {'mensaje': 'El usuario ha sido editado con éxito', 'usuario_modificado': usuario.to_json()}, 201
 
-
 class Usuarios(Resource): 
-    @role_required(roles = ["admin"])
+    @role_required(roles=["admin", "bibliotecario"])
     def get(self):
         # Página inicial por defecto
         page = 1
@@ -84,33 +75,3 @@ class Usuarios(Resource):
                         })
 
 
-    
-    #insertar recurso- (esta comentado porque ya tenemos un register)
-   # def post(self):
-    #    usuario = UsuariosModel.from_json(request.get_json())
-     #   db.session.add(usuario)
-      #  db.session.commit()
-       # return usuario.to_json(), 201
-
-USUARIOS = {
-    1: {
-        "nombre y apellido completo": "Facundo Mesa",
-        "telefono": "2615486975",
-        "correo electronico": "fa.mesa@alumno.um.edu.ar"
-    },
-    2: {
-        "nombre y apellido completo": "Facundo Mangione",
-        "telefono": "2614961572",
-        "correo electronico": "f.mangione@alumno.um.edu.ar"
-    },
-    3: {
-        "nombre y apellido completo": "Luciana Sosa",
-        "telefono": "2612740142",
-        "correo electronico": "lg.sosa@alumno.um.edu.ar"
-    },
-    4: {
-        "nombre y apellido completo": "Teresa de Calcuta",
-        "telefono": "2611497589",
-        "correo electronico": "mariateresadecalculta@gmail.com"
-    }
-} 

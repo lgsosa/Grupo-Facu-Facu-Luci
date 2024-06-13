@@ -55,10 +55,6 @@ def create_app():
 
     api.add_resource(resources.LibrosResources, "/libros") #ruta
 
-    api.add_resource(resources.LoginResources, "/login/<id>") #ruta
-
-    api.add_resource(resources.Sign_inResources, "/signin") #ruta
-
     api.add_resource(resources.PrestamosResource, "/prestamos") #ruta
 
     api.add_resource(resources.PrestamoResource, "/prestamo/<id>") #ruta

@@ -38,7 +38,7 @@ class Prestamo (Resource):
 
 
 class Prestamos (Resource):
-    @role_required(roles = ["admin"])
+    @role_required(roles=["admin", "bibliotecario"])
     def get(self):
         # Página inicial por defecto
         page = 1

@@ -8,7 +8,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 
 
 class Notificaciones(Resource):
-    @jwt_required(optional=True)
+    @role_required(roles=["admin", "bibliotecario","alumno"])
     def get(self):
         # Página inicial por defecto
         page = 1
@@ -33,20 +33,26 @@ class Notificaciones(Resource):
                         'page': page
                         })
     
-    #insertar recurso
-    @role_required(roles=["admin"])
-
-    def post(self):
-        current_user_id = get_jwt_identity()  # Obtiene el ID del usuario actual
-        if current_user_id is not None:  # Asegurarse de que el ID del usuario actual no sea None
-            notificacion_data = request.get_json()
-            notificacion_data["id_usuario"] = current_user_id  # Establece el ID del usuario en los datos de la notificación
+    # Insertar recurso
+    @role_required(roles=["admin", "bibliotecario"])
+    def post(self, current_user):
+        notificacion_data = request.get_json()
+        if "admin" in current_user.roles:
+            # El administrador puede enviar notificaciones a todos los usuarios
             notificacion = NotificacionesModel.from_json(notificacion_data)
             db.session.add(notificacion)
             db.session.commit()
             return notificacion.to_json(), 201
-        else:
-            # Manejar el caso donde el ID del usuario actual es None
-            return jsonify({'message': 'Usuario no autenticado'}), 401
+        elif "bibliotecario" in current_user.roles:
+            # El bibliotecario puede enviar notificaciones a todos excepto a los administradores
+            if "admin" not in notificacion_data["roles"]:
+                notificacion_data["id_usuario"] = current_user.id
+                notificacion = NotificacionesModel.from_json(notificacion_data)
+                db.session.add(notificacion)
+                db.session.commit()
+                return notificacion.to_json(), 201
+            else:
+                return jsonify({'message': 'No tienes permiso para enviar una notificación a un administrador'}), 403
+
 
 

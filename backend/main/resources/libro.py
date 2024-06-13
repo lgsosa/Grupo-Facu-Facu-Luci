@@ -17,7 +17,7 @@ class Libro (Resource):
         #return "No existe el id", 404
     
     # Eliminar recurso libro
-    @role_required(roles = ["admin"])
+    @role_required(roles=["admin"])
     def delete(self, id):
         libro = db.session.query(LibrosModel).get_or_404(id)
         db.session.delete(libro)
@@ -25,7 +25,7 @@ class Libro (Resource):
         return {'mensaje': 'El libro ha sido eliminado con éxito'}, 204
     
     # Modificar el recurso libro
-    @role_required(roles = ["admin"])
+    @role_required(roles=["admin","bibliotecario"])
     def put(self, id):
         libro = db.session.query(LibrosModel).get_or_404(id)
         data = request.get_json()
