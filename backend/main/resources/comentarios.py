@@ -3,6 +3,7 @@ from flask_restful import Resource, Api, reqparse
 import json
 from .. import db
 from main.models import ComentariosModel
+from flask_jwt_extended import jwt_required
 
 app = Flask(__name__)
 api = Api(app)
@@ -10,6 +11,7 @@ api = Api(app)
 comentarios = {}
  
 class Comentario(Resource):
+    @jwt_required(optional=True)
     def get(self):
         # Página inicial por defecto
         page = 1
@@ -39,6 +41,7 @@ class Comentario(Resource):
         #return jsonify(comentarios), 200
 
     #insertar recurso
+    @jwt_required(optional=True)
     def post(self):
         comentarios = ComentariosModel.from_json(request.get_json())
         db.session.add(comentarios)

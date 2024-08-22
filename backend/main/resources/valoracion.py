@@ -3,6 +3,8 @@ from flask_restful import Resource, Api, reqparse
 from .. import db
 from main.models import Valoraciones_Admin_Model
 import json
+from flask_jwt_extended import jwt_required
+from main.auth.decorators import role_required
 
 app = Flask(__name__)
 api = Api(app)
@@ -16,6 +18,7 @@ parser.add_argument('id_libro', type=int, help='ID del libro')
 parser.add_argument('valoracion', type=int, help='Valoración del libro')
 
 class Valoracion(Resource):
+    @jwt_required(optional=True)
     def post(self):
         args = parser.parse_args()
         id_libro = args['id_libro']
@@ -25,6 +28,7 @@ class Valoracion(Resource):
 
 
 class ValoracionAdmin(Resource):
+    @role_required(roles=["admin", "bibliotecario"])
     def get(self):
         # Página inicial por defecto
         page = 1

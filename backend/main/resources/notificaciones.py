@@ -1,17 +1,14 @@
 from flask_restful import Resource
 from flask import request, jsonify
-from .usuario import USUARIOS
 import json
 from main.models import NotificacionesModel
 from .. import db
-
-NOTIFICACIONES = {
-    1: {"notificacion": " Por favor pase por secretaria cuando sea posible: "},
-    2: {"notificacion": " Se olvido sus pertenencias en la biblioteca "}
-}
+from main.auth.decorators import role_required
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 
 class Notificaciones(Resource):
+    @role_required(roles=["admin", "bibliotecario","alumno"])
     def get(self):
         # Página inicial por defecto
         page = 1
@@ -36,9 +33,26 @@ class Notificaciones(Resource):
                         'page': page
                         })
     
-    #insertar recurso
-    def post(self):
-        notificaciones = NotificacionesModel.from_json(request.get_json())
-        db.session.add(notificaciones)
-        db.session.commit()
-        return notificaciones.to_json(), 201
+    # Insertar recurso
+    @role_required(roles=["admin", "bibliotecario"])
+    def post(self, current_user):
+        notificacion_data = request.get_json()
+        if "admin" in current_user.roles:
+            # El administrador puede enviar notificaciones a todos los usuarios
+            notificacion = NotificacionesModel.from_json(notificacion_data)
+            db.session.add(notificacion)
+            db.session.commit()
+            return notificacion.to_json(), 201
+        elif "bibliotecario" in current_user.roles:
+            # El bibliotecario puede enviar notificaciones a todos excepto a los administradores
+            if "admin" not in notificacion_data["roles"]:
+                notificacion_data["id_usuario"] = current_user.id
+                notificacion = NotificacionesModel.from_json(notificacion_data)
+                db.session.add(notificacion)
+                db.session.commit()
+                return notificacion.to_json(), 201
+            else:
+                return jsonify({'message': 'No tienes permiso para enviar una notificación a un administrador'}), 403
+
+
+
