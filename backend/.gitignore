@@ -9,3 +9,4 @@ pyvenv.cfg
 .env
 backend/venv
 
+venv/

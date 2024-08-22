@@ -51,6 +51,8 @@ def create_app():
 
     api.add_resource(resources.UsuarioResources, "/usuario/<id>")#ruta
 
+    api.add_resource(resources.UsuarioResources, '/update_usuario/<int:usuario_id>', endpoint='update_usuario')
+
     api.add_resource(resources.LibroResources, "/libro/<id>") #ruta
 
     api.add_resource(resources.LibrosResources, "/libros") #ruta
@@ -71,7 +73,7 @@ def create_app():
 
     api.add_resource(resources.AutorResource, "/autor/<id>") #ruta
 
-    api.add_resource(resources.ReseñasResource, "/reseñas/<id>") #ruta
+    api.add_resource(resources.ReseñasResource, "/reseñas/<id>") #ruta 
 
 
     api.init_app(app)
