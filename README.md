@@ -15,11 +15,14 @@
                     <li>Facundo Mesa</li>
                 </ul>
             </td>
+        </tr>
+        <tr>
             <td>Figma</td>
             <td>
                 <ul>
-                    <li>fhttps://www.figma.com/design/XcsWSAdDceCSXh2qAsn0Uy/Biblioteca?node-id=0-1&t=M7SOE3meEdsbwJt6-0</li>
+                    <li><a href="https://www.figma.com/design/XcsWSAdDceCSXh2qAsn0Uy/Biblioteca?node-id=0-1&t=M7SOE3meEdsbwJt6-0">Link a Figma</a></li>
                 </ul>
-            </tr>    
+            </td>
+        </tr>
+    </tbody>
 </table>
-
