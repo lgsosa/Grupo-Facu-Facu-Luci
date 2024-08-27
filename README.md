@@ -20,7 +20,7 @@
             <td>Figma</td>
             <td>
                 <ul>
-                    <li><a href="https://www.figma.com/design/XcsWSAdDceCSXh2qAsn0Uy/Biblioteca?node-id=0-1&t=M7SOE3meEdsbwJt6-0">Link a Figma</a></li>
+                    <li><a href="https://www.figma.com/proto/XcsWSAdDceCSXh2qAsn0Uy/Biblioteca?node-id=0-1&t=M7SOE3meEdsbwJt6-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1">Link a Figma</a></li>
                 </ul>
             </td>
         </tr>
