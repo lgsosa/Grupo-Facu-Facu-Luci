@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrarse</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to bottom, #BAD1C9, #CED1C0);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 350px;
+    }
+
+    .logo img {
+      width: 100px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #5a5a5a;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    input {
+      border: 2px solid #5a5a5a;
+      border-radius: 20px;
+    }
+
+    button {
+      background-color: #5a5a5a;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 30px;
+      color: white;
+      width: 100%;
+    }
+
+    .social-login {
+      display: flex;
+      justify-content: space-evenly;
+      margin-top: 20px;
+    }
+
+    .social-login img {
+      width: 40px;
+    }
+
+    .back-icon {
+      margin-top: 20px;
+    }
+
+    .back-icon img {
+      width: 40px;
+    }
+
+    .forgot-password, .register {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #5a5a5a;
+    }
+
+    .register a {
+      color: #007bff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Logotipo -->
+    <div class="logo">
+      <img src="/home/lucianasosa/fotos figma/Screenshot from 2024-09-10 21-54-58.png" alt="Logo">
+    </div>
+
+    <!-- Título -->
+    <h2>¡Bienvenido de nuevo!<br>Que gusto verte otra vez!</h2>
+
+    <!-- Formulario de inicio de sesión -->
+    <form action="/login" method="post">
+      <div class="mb-3">
+        <input type="email" class="form-control" id="email" name="email" placeholder="Ingresa un email" required>
+      </div>
+      <div class="mb-3">
+        <input type="password" class="form-control" id="password" name="password" placeholder="Ingresa la contraseña" required>
+      </div>
+      <button type="submit">Ingresar</button>
+    </form>
+
+    <!-- Olvidó su contraseña -->
+    <p class="forgot-password">¿Olvidaste tu contraseña?</p>
+
+    <!-- Ícono de regresar -->
+    <div class="back-icon">
+      <a href="/">
+        <img src="/home/lucianasosa/fotos figma/flecha.png" alt="Volver">
+      </a>
+    </div>
+
+    <!-- Registro -->
+    <p class="register">¿No tienes una cuenta? <a href="/register">Regístrate ahora</a></p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
