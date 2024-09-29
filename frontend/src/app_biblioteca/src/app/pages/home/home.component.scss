@@ -1,0 +1,33 @@
+.book-grid {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los libros se ajusten en varias filas si es necesario */
+    gap: 150px; /* Espacio entre los libros */
+  }
+  
+  .book {
+    display: flex;
+    flex-direction: column; /* Asegura que la imagen y el texto estén en columnas */
+    align-items: center; /* Centra los elementos horizontalmente */
+    width: 120px; /* Ancho fijo para cada contenedor de libro */
+  }
+  
+  .book img {
+    width: 120%;
+    height: 250px;
+    object-fit: cover;
+  }
+  
+  .top-bar {
+    display: flex;
+    justify-content: flex-end; /* Coloca la imagen a la derecha */
+    align-items: center; /* Alinea verticalmente la imagen en el centro de la barra */
+    padding: 10px; /* Añade espacio dentro de la barra */
+    background-color: #f8f9fa; /* Cambia el color de fondo si es necesario */
+    height: 50px; /* Ajusta la altura de la barra según tu preferencia */
+  }
+  
+  .config-img {
+    width: 40px;
+    height: 40px;
+  }
+  
