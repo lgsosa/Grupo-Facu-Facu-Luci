@@ -1,0 +1,34 @@
+<app-nav></app-nav>
+<div class="container">
+    <!-- Logotipo -->
+    <div class="logo">
+      <img src="frontend/src/app_biblioteca/src/assets/logo.png" alt="Logo">
+    </div>
+
+    <!-- Título -->
+    <h2>¡Bienvenido de nuevo!<br>Que gusto verte otra vez!</h2>
+
+    <!-- Formulario de inicio de sesión -->
+    <form action="/login" method="post">
+      <div class="mb-3">
+        <input type="email" class="form-control" id="email" name="email" placeholder="Ingresa un email" required>
+      </div>
+      <div class="mb-3">
+        <input type="password" class="form-control" id="password" name="password" placeholder="Ingresa la contraseña" required>
+      </div>
+      <button type="submit">Ingresar</button>
+    </form>
+
+    <!-- Olvidó su contraseña -->
+    <p class="forgot-password">¿Olvidaste tu contraseña?</p>
+
+    <!-- Ícono de regresar -->
+    <div class="back-icon">
+      <a href="/">
+        <img src="/home/lucianasosa/fotos figma/flecha.png" alt="Volver">
+      </a>
+    </div>
+
+    <!-- Registro -->
+    <p class="register">¿No tienes una cuenta? <a href="/register">Regístrate ahora</a></p>
+  </div>

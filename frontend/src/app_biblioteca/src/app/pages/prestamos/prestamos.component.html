@@ -1,0 +1,58 @@
+<app-nav></app-nav>
+<div class="container mt-5">
+    <h2>Gestión de Préstamos</h2>
+    
+    <!-- Botones para editar, eliminar y añadir -->
+    <div class="btn-group">
+      <button class="btn btn-secondary">Editar</button>
+      <button class="btn btn-secondary">Eliminar</button>
+      <button class="btn btn-secondary">Añadir</button>
+    </div>
+
+    <!-- Barra de búsqueda -->
+    <div class="search-bar">
+      <input type="text" class="form-control w-50" placeholder="Buscar usuarios">
+    </div>
+
+    <!-- Tabla de préstamos -->
+    <table class="table table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Cantidad</th>
+          <th>Tiempo de devolución</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>62495</td>
+          <td>Jose</td>
+          <td>1</td>
+          <td>20/08/2024</td>
+        </tr>
+        <tr>
+          <td>61578</td>
+          <td>Jazmin</td>
+          <td>2</td>
+          <td>20/08/2024</td>
+        </tr>
+        <tr>
+          <td>Pepe</td>
+          <td>vencido</td>
+          <td>4</td>
+          <td>10/08/2024</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Botón para enviar recordatorio -->
+    <div class="reminder-btn">
+      <button class="btn btn-secondary">Enviar recordatorio</button>
+    </div>
+
+    <!-- Paginación -->
+    <div class="d-flex justify-content-between mt-3">
+      <button class="btn btn-secondary">←</button>
+      <button class="btn btn-secondary">Next →</button>
+    </div>
