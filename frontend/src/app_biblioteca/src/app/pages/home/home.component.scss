@@ -1,0 +1,25 @@
+.book-grid {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los libros se ajusten en varias filas si es necesario */
+    gap: 150px; /* Espacio entre los libros */
+  }
+  
+  .book {
+    display: flex;
+    flex-direction: column; /* Asegura que la imagen y el texto estén en columnas */
+    align-items: center; /* Centra los elementos horizontalmente */
+    width: 160px; /* Ancho fijo para cada contenedor de libro */
+  }
+  
+  .book img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+  }
+  
+  .config-img {
+    width: 40px;
+    height: 40px;
+  } 
+  
+  

@@ -1,0 +1,13 @@
+from .usuario import Usuario as UsuarioResources
+from .usuario import Usuarios as UsuariosResources
+from .libro import Libro as LibroResources
+from .libro import Libros as LibrosResources
+from .prestamo import Prestamo as PrestamoResource
+from .prestamo import Prestamos as PrestamosResource
+from .notificaciones import Notificaciones as NotificacionesResource
+from .valoracion import Valoracion as ValoracionResource
+from .valoracion import ValoracionAdmin as ValoracionAdminResource
+from .comentarios import Comentario as ComentarioResource
+from .autores import Autor as AutorResource
+from .autores import Autores as AutoresResource
+from .reseñas import Reseñas as ReseñasResource

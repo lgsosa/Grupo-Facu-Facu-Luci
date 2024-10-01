@@ -2,5 +2,11 @@
 /include
 /lib
 /lib64
-.env
+
 pyvenv.cfg
+
+/venv
+.env
+backend/venv
+
+venv/

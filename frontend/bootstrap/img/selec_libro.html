@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selector de Libros</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #e0e4d8;
+    }
+
+    .top-bar {
+      width: 100%;
+      height: 50px;
+      background-color: #CED1C0;  
+      display: flex;
+      align-items: center;
+      padding-left: 20px;
+    }
+
+    .top-bar img {
+      height: 40px;
+    }
+
+    .container {
+      background-color: #f5f7f1;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      margin-top: 20px; /* Ajuste para dar espacio a la barra superior */
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 4 columnas de igual tamaño */
+      gap: 20px; /* Espacio entre los libros */
+    }
+
+    .book {
+      text-align: center;
+      height: 100%; /* Asegura que todos los contenedores tengan la misma altura */
+    }
+
+    .book img { 
+      width: 100%;
+      height: 420px; /* Altura fija para que las imágenes sean del mismo tamaño */
+      object-fit: cover; /* Asegura que la imagen se ajuste al contenedor sin distorsión */
+      border-radius: 5px;
+      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .book .title {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .stars {
+      color: gold;
+      margin-top: 5px;
+    }
+
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .filter-bar .form-control {
+      margin-right: 10px; /* Espacio entre el input y los botones */
+      flex: 1;
+    }
+
+    .settings-icon {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      margin-left: 10px; /* Ajuste para mantener distancia adecuada */
+    }
+
+    .settings-icon img {
+      width: 24px;
+      height: 24px;
+    }
+
+    .dropdown-menu-settings,
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    .dropdown-menu-settings {
+      top: 100%;
+      right: 0;
+    }
+
+    .dropdown-menu.show,
+    .dropdown-menu-settings.show {
+      display: block;
+    }
+
+    .dropdown-menu-settings li,
+    .dropdown-menu li {
+      list-style: none;
+      padding: 5px;
+      cursor: pointer;
+    }
+
+    .dropdown-menu-settings li:hover,
+    .dropdown-menu li:hover {
+      background-color: #f0f0f0;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+  <!-- Barra superior -->
+  <div class="top-bar">
+    <img src="/home/lucianasosa/fotos figma/Screenshot from 2024-09-10 21-54-58.png" alt="Logo">
+  </div>
+
+  <div class="container">
+    <div class="filter-bar">
+      <input type="text" class="form-control w-75" placeholder="¿Qué desea leer?">
+      <div class="dropdown">
+        <button class="btn btn-secondary" id="filterButton">Filtro</button>
+        <ul class="dropdown-menu" id="filterMenu">
+          <li>Romance</li>
+          <li>Ficción</li>
+          <li>Misterio</li>
+          <li>Ciencia Ficción</li>
+          <li>Fantasía</li>
+        </ul>
+      </div>
+      <div class="settings-icon" id="settingsIcon">
+        <img src="https://cdn-icons-png.flaticon.com/512/3524/3524639.png" alt="Configuración">
+      </div>
+
+      <ul class="dropdown-menu-settings" id="settingsMenu">
+        <li>Configuración de Usuario</li>
+        <li>Notificaciones</li>
+        <li>Salir de la sesión</li>
+        <li>Préstamos de libros</li>
+      </ul>
+    </div>
+
+    <div class="book-grid">
+      <!-- Cada libro -->
+      <div class="book">
+        <img src="/home/lucianasosa/fotos figma/1003w-Ct1fLal3ekY.webp" alt="Reyes Caídos">
+        <div class="title">Reyes Caídos</div>
+        <div class="stars">★★★★★</div>
+      </div>
+      <div class="book">
+        <img src="/home/lucianasosa/fotos figma/crucedecaminos.webp" alt="Cruce de Caminos">
+        <div class="title">Cruce de Caminos</div>
+        <div class="stars">★★★★★</div>
+      </div>
+      <div class="book">
+        <img src="/home/lucianasosa/fotos figma/lhommemontagne.jpg" alt="L'homme de la montagne">
+        <div class="title">L'homme de la montagne</div>
+        <div class="stars">★★★★☆</div>
+      </div>
+      <div class="book">
+        <img src="/home/lucianasosa/fotos figma/cuentosdeotoño.jpg" alt="Cuentos de Otoño">
+        <div class="title">Cuentos de Otoño</div>
+        <div class="stars">★★★★★</div>
+      </div>
+    </div>
+
+    <!-- Paginación -->
+    <div class="pagination mt-3">
+      <button class="btn btn-secondary">←</button>
+      <button class="btn btn-secondary">Next →</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const settingsIcon = document.getElementById('settingsIcon');
+    const settingsMenu = document.getElementById('settingsMenu');
+    const filterButton = document.getElementById('filterButton');
+    const filterMenu = document.getElementById('filterMenu');
+
+    settingsIcon.addEventListener('mouseover', () => {
+      settingsMenu.classList.add('show');
+    });
+
+    settingsIcon.addEventListener('mouseout', () => {
+      settingsMenu.classList.remove('show');
+    });
+
+    settingsMenu.addEventListener('mouseover', () => {
+      settingsMenu.classList.add('show');
+    });
+
+    settingsMenu.addEventListener('mouseout', () => {
+      settingsMenu.classList.remove('show');
+    });
+
+    filterButton.addEventListener('mouseover', () => {
+      filterMenu.classList.add('show');
+    });
+
+    filterButton.addEventListener('mouseout', () => {
+      filterMenu.classList.remove('show');
+    });
+
+    filterMenu.addEventListener('mouseover', () => {
+      filterMenu.classList.add('show');
+    });
+
+    filterMenu.addEventListener('mouseout', () => {
+      filterMenu.classList.remove('show');
+    });
+  </script>
+</body>
+</html>
