@@ -12,6 +12,8 @@ import { GestiondeusuarioComponent } from './pages/gestiondeusuario/gestiondeusu
 import { RegisterComponent } from './pages/register/register.component';
 import { PrestamosComponent } from './pages/prestamos/prestamos.component';
 import { LibroComponent } from './pages/libro/libro.component';
+import { LoginComponent } from './pages/login/login.component';
+import { ListaLibrosEstrellasComponent } from './pages/lista-libros-estrellas/lista-libros-estrellas.component';
 
 // Define tus rutas aquí
 const routes: Routes = [
@@ -32,7 +34,9 @@ const routes: Routes = [
     GestiondeusuarioComponent,
     RegisterComponent,
     PrestamosComponent,
-    LibroComponent
+    LibroComponent,
+    LoginComponent,
+    ListaLibrosEstrellasComponent
   ],
   imports: [
     BrowserModule,

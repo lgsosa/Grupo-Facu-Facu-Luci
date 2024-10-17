@@ -1,0 +1,102 @@
+/* Estilo para la barra superior */
+.top-bar {
+  background-color: #f8f9fa;
+  padding: 10px;
+  text-align: center;
+
+  img {
+    max-height: 60px;
+  }
+}
+
+/* Contenedor principal */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Estilos para los detalles de los libros */
+.book-detail {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 50px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para las portadas de los libros */
+.book-cover {
+  flex: 1;
+  margin-right: 30px;
+
+  img {
+    width: 200px;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Estilo para la información del libro */
+.book-info {
+  flex: 3;
+
+  h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .stars {
+    font-size: 18px;
+    color: #FFD700; /* Color dorado para las estrellas */
+    margin-bottom: 15px;
+  }
+
+  .synopsis {
+    font-size: 16px;
+    color: #333;
+
+    h4 {
+      font-size: 18px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      line-height: 1.5;
+    }
+  }
+}
+
+/* Estilo para los comentarios */
+.comments {
+  margin-top: 20px;
+
+  h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .list-group-item {
+    background-color: #fff;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+}
+
+/* Estilo para la paginación */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 0 5px;
+    border-radius: 5px;
+  }
+}

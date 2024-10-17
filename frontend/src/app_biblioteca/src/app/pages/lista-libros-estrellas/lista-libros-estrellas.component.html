@@ -1,0 +1,36 @@
+<app-nav></app-nav>
+<div class="container mt-5" *ngIf="libros && libros.length > 0">
+  <!-- Recorre la lista de libros -->
+  <div *ngFor="let libro of getPaginatedLibros()" class="book-detail">
+    <div class="book-cover">
+      <img [src]="libro.image" alt="{{ libro.title }}" style="width: 200px; height: auto; margin-left: 150px;">
+    </div>
+    <div class="book-info"> 
+      <h2>{{ libro.title }}</h2>
+      <!-- Mostrar estrellas -->
+      <div class="stars">
+        <span *ngFor="let star of libro.stars">{{ star }}</span>
+      </div>
+      <div class="synopsis">
+        <h4>Sinopsis</h4>
+        <p>{{ libro.synopsis }}</p> <!-- Esto debería mostrar la sinopsis -->
+      </div>
+    </div>
+
+    <!-- Comentarios -->
+    <div class="comments mt-3">
+      <h4>Comentarios</h4>
+      <ul class="list-group">
+        <li *ngFor="let comentario of libro.comentarios" class="list-group-item">
+          {{ comentario }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Paginación -->
+<div class="pagination mt-3">
+  <button class="btn btn-secondary" (click)="previousPage()">←</button>
+  <button class="btn btn-secondary" (click)="nextPage()">Next →</button>
+</div>

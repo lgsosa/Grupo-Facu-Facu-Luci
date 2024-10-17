@@ -6,20 +6,23 @@ import { GestiondeusuarioComponent } from './pages/gestiondeusuario/gestiondeusu
 import { RegisterComponent } from './pages/register/register.component';
 import { PrestamosComponent } from './pages/prestamos/prestamos.component';
 import { LibroComponent } from './pages/libro/libro.component';
+import { LoginComponent } from './pages/login/login.component';
+import { ListaLibrosEstrellasComponent } from './pages/lista-libros-estrellas/lista-libros-estrellas.component';
 
 const routes: Routes = [
+  { path: "home", component: HomeComponent },
+  { path: "error_page", component: ErrorPageComponent },
+  { path: "gestiondeusuario", component: GestiondeusuarioComponent },
+  { path: "register", component: RegisterComponent },
+  { path:"login", component:LoginComponent},
+  { path: "prestamos", component: PrestamosComponent },
+  { path: "libros", component: ListaLibrosEstrellasComponent },
+  { path: "libro/:id", component: LibroComponent }, // Aquí agregas el parámetro :id
 
-  {path:"home", component: HomeComponent},
-  {path:"error_page", component:ErrorPageComponent},
-  {path:"gestiondeusuario", component:GestiondeusuarioComponent},
-  {path:"register", component:RegisterComponent},
-  {path:"prestamos", component:PrestamosComponent},
-  {path:"libro", component:LibroComponent},
-
-  {path:"", redirectTo: "/home", pathMatch:"full"},
-  {path:"**", redirectTo: "error_page"}
-
+  { path: "", redirectTo: "/home", pathMatch: "full" },
+  { path: "**", redirectTo: "error_page" }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
