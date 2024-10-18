@@ -8,24 +8,23 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit { // Cambia a OnInit
-  loginForm: FormGroup;
+  export class LoginComponent implements OnInit {
+    loginForm: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router
-  ) {
-    // Inicializa el formulario
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
-    });
-  }
+    constructor(
+      private fb: FormBuilder,
+      private authService: AuthService,
+      private router: Router
+    ) {
+      this.loginForm = this.fb.group({
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', Validators.required]
+      });
+    }
 
-  ngOnInit(): void {
-    // Aquí puedes realizar inicializaciones adicionales si es necesario
-  }
+    ngOnInit(): void {
+      console.log('LoginComponent inicializado'); 
+    }    
 
   onSubmit(): void {
     if (this.loginForm.valid) {
@@ -33,7 +32,7 @@ export class LoginComponent implements OnInit { // Cambia a OnInit
       this.authService.login({ email, password }).subscribe(
         (response) => {
           this.authService.saveToken(response.token);
-          this.router.navigate(['/home']); // Redirigir a home u otra página
+          this.router.navigate(['/home']);
         },
         (error) => {
           console.error('Error en el login', error);
@@ -42,3 +41,5 @@ export class LoginComponent implements OnInit { // Cambia a OnInit
     }
   }
 }
+
+

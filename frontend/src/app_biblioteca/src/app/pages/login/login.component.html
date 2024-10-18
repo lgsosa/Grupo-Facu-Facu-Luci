@@ -1,20 +1,41 @@
 <app-nav></app-nav>
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="email">Email</label>
-    <input id="email" formControlName="email" type="email" />
-    <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"> <!-- Usa el operador de encadenamiento opcional -->
-      <small>Email inválido</small>
+<div class="container">
+    <!-- Logotipo -->
+    <div class="logo text-center">
+      <img src="assets/logo.png" alt="Logo" class="img-fluid">
     </div>
-  </div>
 
-  <div>
-    <label for="password">Password</label>
-    <input id="password" formControlName="password" type="password" />
-    <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"> <!-- Usa el operador de encadenamiento opcional -->
-      <small>Contraseña requerida</small>
+    <!-- Título -->
+    <h2 class="text-center">¡Bienvenido!<br>Inicia sesión para continuar.</h2>
+
+    <!-- Formulario de inicio de sesión -->
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input id="email" formControlName="email" type="email" class="form-control" placeholder="Ingresa tu email" />
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"> 
+          <small class="text-danger">Email inválido</small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <input id="password" formControlName="password" type="password" class="form-control" placeholder="Ingresa tu contraseña" />
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"> 
+          <small class="text-danger">Contraseña requerida</small>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Iniciar Sesión</button>
+    </form>
+
+    <!-- Enlace para registro -->
+    <p class="text-center mt-3">¿No tienes una cuenta? <a href="/register">Regístrate aquí</a></p>
+
+    <!-- Ícono de regresar -->
+    <div class="back-icon text-center">
+      <a href="/">
+        <img src="assets/flecha.png" alt="Volver" class="img-fluid" width="30">
+      </a>
     </div>
-  </div>
-
-  <button type="submit" [disabled]="loginForm.invalid">Login</button>
-</form>
+</div>

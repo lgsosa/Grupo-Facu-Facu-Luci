@@ -1,16 +1,20 @@
-import { TestBed } from '@angular/core/testing';
+import { Injectable } from '@angular/core';
 
-import { AuthService } from './auth.service';
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+  private tokenKey = 'auth_token'; // Nombre del token en localStorage
 
-describe('AuthService', () => {
-  let service: AuthService;
+  saveToken(token: string): void {
+    localStorage.setItem(this.tokenKey, token);
+  }
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(AuthService);
-  });
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem(this.tokenKey); // Devuelve true si hay un token
+  }
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+  logout(): void {
+    localStorage.removeItem(this.tokenKey); // Elimina el token al cerrar sesión
+  }
+}

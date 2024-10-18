@@ -13,6 +13,7 @@ import { PrestamosComponent } from './pages/prestamos/prestamos.component';
 import { LibroComponent } from './pages/libro/libro.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ListaLibrosEstrellasComponent } from './pages/lista-libros-estrellas/lista-libros-estrellas.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ListaLibrosEstrellasComponent } from './pages/lista-libros-estrellas/li
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    AppRoutingModule  
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
