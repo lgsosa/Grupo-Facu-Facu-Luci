@@ -1,45 +1,52 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
 import { AuthService } from '../../service/auth.service';
-import { Router } from '@angular/router';
+import { Router } from '@angular/router'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrl: './login.component.scss'
 })
-  export class LoginComponent implements OnInit {
-    loginForm: FormGroup;
+export class LoginComponent {
+  loginForm!: FormGroup;
 
-    constructor(
-      private fb: FormBuilder,
-      private authService: AuthService,
-      private router: Router
-    ) {
-      this.loginForm = this.fb.group({
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', Validators.required]
-      });
-    }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {
+    this.loginForm = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    })
 
-    ngOnInit(): void {
-      console.log('LoginComponent inicializado'); 
-    }    
+  }
 
-  onSubmit(): void {
-    if (this.loginForm.valid) {
-      const { email, password } = this.loginForm.value;
-      this.authService.login({ email, password }).subscribe(
-        (response) => {
-          this.authService.saveToken(response.token);
-          this.router.navigate(['/home']);
-        },
-        (error) => {
-          console.error('Error en el login', error);
-        }
-      );
+  irAlLogin(dataLogin:any) {
+    this.authService.login(dataLogin).subscribe({
+      next: (rta:any) => {
+        alert('Credenciales correctas!!!');
+        console.log('Exito: ', rta);
+        localStorage.setItem('token', rta.access_token);
+        this.router.navigateByUrl('home');
+      }, error: (err:any) => {
+        alert('Usuario o contraseña incorrecta.');
+        console.log('Exito: ', err);
+        localStorage.removeItem('token');
+      }, complete: () => {
+        console.log('Fianlizo');
+      }
+    })
+  }
+
+  submit() {
+    if(this.loginForm.valid) {
+      console.log('Datos del formulario: ',this.loginForm.value);
+      this.irAlLogin(this.loginForm.value);
+    } else {
+      alert('Los valores son requeridos');
     }
   }
+
 }
-
-

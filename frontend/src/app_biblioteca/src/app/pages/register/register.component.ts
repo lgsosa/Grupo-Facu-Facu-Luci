@@ -26,20 +26,4 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onSubmit(): void {
-    if (this.registerForm.valid) {
-        const { name, lastname, email, password } = this.registerForm.value;
-        this.authService.register({ name, lastname, email, password }).subscribe(
-            (response) => {
-                console.log('Registro exitoso', response);
-                // Redirigir al login o mostrar un mensaje
-                this.router.navigate(['/login']);
-            },
-            (error) => {
-                console.error('Error en el registro', error);
-
-        }
-      );
-    }
-  }
 }
