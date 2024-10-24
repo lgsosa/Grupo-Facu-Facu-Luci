@@ -9,6 +9,7 @@
     <h2 class="text-center">¡Regístrate para continuar!</h2>
 
     <!-- Formulario de registro -->
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="name" class="form-label">Nombre</label>
         <input id="name" formControlName="name" type="text" class="form-control" placeholder="Ingresa tu nombre" />
@@ -40,15 +41,3 @@
           <small class="text-danger">Contraseña requerida</small>
         </div>
       </div>
-
-      <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Registrarse</button>
-    <!-- Ícono de regresar -->
-    <div class="back-icon text-center">
-      <a href="/">
-        <img src="assets/flecha.png" alt="Volver" class="img-fluid" width="30">
-      </a>
-    </div>
-
-    <!-- Inicio de sesión -->
-    <p class="text-center mt-3">¿Ya tienes una cuenta? <a href="/login">Inicia sesión aquí</a></p>
-</div>

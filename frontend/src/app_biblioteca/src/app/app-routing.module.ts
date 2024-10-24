@@ -9,6 +9,7 @@ import { LibroComponent } from './pages/libro/libro.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ListaLibrosEstrellasComponent } from './pages/lista-libros-estrellas/lista-libros-estrellas.component';
 import { AuthGuard } from './guards/auth.guard'; 
+import { RoleGuard } from './guards/role.guard'; // Importa RoleGuard
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
