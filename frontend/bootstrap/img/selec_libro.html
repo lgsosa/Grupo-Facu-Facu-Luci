@@ -28,7 +28,7 @@
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-      margin-top: 20px; /* Ajuste para dar espacio a la barra superior */
+      margin-top: 20px;
     }
 
     h2 {
@@ -39,19 +39,18 @@
 
     .book-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr); /* 4 columnas de igual tamaño */
-      gap: 20px; /* Espacio entre los libros */
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
     }
 
     .book {
       text-align: center;
-      height: 100%; /* Asegura que todos los contenedores tengan la misma altura */
     }
 
     .book img { 
       width: 100%;
-      height: 420px; /* Altura fija para que las imágenes sean del mismo tamaño */
-      object-fit: cover; /* Asegura que la imagen se ajuste al contenedor sin distorsión */
+      height: 420px;
+      object-fit: cover;
       border-radius: 5px;
       box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
     }
@@ -74,7 +73,7 @@
     }
 
     .filter-bar .form-control {
-      margin-right: 10px; /* Espacio entre el input y los botones */
+      margin-right: 10px;
       flex: 1;
     }
 
@@ -82,7 +81,7 @@
       display: flex;
       align-items: center;
       cursor: pointer;
-      margin-left: 10px; /* Ajuste para mantener distancia adecuada */
+      margin-left: 10px;
     }
 
     .settings-icon img {
@@ -131,9 +130,8 @@
   </style>
 </head>
 <body>
-  <!-- Barra superior -->
   <div class="top-bar">
-    <img src="/home/lucianasosa/fotos figma/Screenshot from 2024-09-10 21-54-58.png" alt="Logo">
+    <img src="assets/logo.png" alt="Logo">
   </div>
 
   <div class="container">
@@ -162,30 +160,28 @@
     </div>
 
     <div class="book-grid">
-      <!-- Cada libro -->
       <div class="book">
-        <img src="/home/lucianasosa/fotos figma/1003w-Ct1fLal3ekY.webp" alt="Reyes Caídos">
+        <img src="../css/reyes_caidos.webp" alt="Reyes Caídos">
         <div class="title">Reyes Caídos</div>
         <div class="stars">★★★★★</div>
       </div>
       <div class="book">
-        <img src="/home/lucianasosa/fotos figma/crucedecaminos.webp" alt="Cruce de Caminos">
+        <img src="../css/crucedecaminos.webp" alt="Cruce de Caminos">
         <div class="title">Cruce de Caminos</div>
         <div class="stars">★★★★★</div>
       </div>
       <div class="book">
-        <img src="/home/lucianasosa/fotos figma/lhommemontagne.jpg" alt="L'homme de la montagne">
-        <div class="title">L'homme de la montagne</div>
+        <img src="../css/lhommemontagne.jpg" alt="L'homme de la montaña">
+        <div class="title">L'homme de la montaña</div>
         <div class="stars">★★★★☆</div>
       </div>
       <div class="book">
-        <img src="/home/lucianasosa/fotos figma/cuentosdeotoño.jpg" alt="Cuentos de Otoño">
+        <img src="../css/cuentosdeotoño.jpg" alt="Cuentos de Otoño">
         <div class="title">Cuentos de Otoño</div>
         <div class="stars">★★★★★</div>
       </div>
     </div>
 
-    <!-- Paginación -->
     <div class="pagination mt-3">
       <button class="btn btn-secondary">←</button>
       <button class="btn btn-secondary">Next →</button>
@@ -207,29 +203,4 @@
       settingsMenu.classList.remove('show');
     });
 
-    settingsMenu.addEventListener('mouseover', () => {
-      settingsMenu.classList.add('show');
-    });
-
-    settingsMenu.addEventListener('mouseout', () => {
-      settingsMenu.classList.remove('show');
-    });
-
-    filterButton.addEventListener('mouseover', () => {
-      filterMenu.classList.add('show');
-    });
-
-    filterButton.addEventListener('mouseout', () => {
-      filterMenu.classList.remove('show');
-    });
-
-    filterMenu.addEventListener('mouseover', () => {
-      filterMenu.classList.add('show');
-    });
-
-    filterMenu.addEventListener('mouseout', () => {
-      filterMenu.classList.remove('show');
-    });
-  </script>
-</body>
-</html>
+    settingsMenu

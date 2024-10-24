@@ -1,34 +1,54 @@
 <app-nav></app-nav>
 <div class="container">
     <!-- Logotipo -->
-    <div class="logo">
-      <img src="frontend/src/app_biblioteca/src/assets/logo.png" alt="Logo">
+    <div class="logo text-center">
+      <img src="assets/logo.png" alt="Logo" class="img-fluid">
     </div>
 
     <!-- Título -->
-    <h2>¡Bienvenido de nuevo!<br>Que gusto verte otra vez!</h2>
+    <h2 class="text-center">¡Regístrate para continuar!</h2>
 
-    <!-- Formulario de inicio de sesión -->
-    <form action="/login" method="post">
+    <!-- Formulario de registro -->
       <div class="mb-3">
-        <input type="email" class="form-control" id="email" name="email" placeholder="Ingresa un email" required>
+        <label for="name" class="form-label">Nombre</label>
+        <input id="name" formControlName="name" type="text" class="form-control" placeholder="Ingresa tu nombre" />
+        <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched"> 
+          <small class="text-danger">Nombre requerido</small>
+        </div>
       </div>
+
       <div class="mb-3">
-        <input type="password" class="form-control" id="password" name="password" placeholder="Ingresa la contraseña" required>
+        <label for="lastname" class="form-label">Apellido</label>
+        <input id="lastname" formControlName="lastname" type="text" class="form-control" placeholder="Ingresa tu apellido" />
+        <div *ngIf="registerForm.get('lastname')?.invalid && registerForm.get('lastname')?.touched"> 
+          <small class="text-danger">Apellido requerido</small>
+        </div>
       </div>
-      <button type="submit">Ingresar</button>
-    </form>
 
-    <!-- Olvidó su contraseña -->
-    <p class="forgot-password">¿Olvidaste tu contraseña?</p>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input id="email" formControlName="email" type="email" class="form-control" placeholder="Ingresa un email" />
+        <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"> 
+          <small class="text-danger">Email inválido</small>
+        </div>
+      </div>
 
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <input id="password" formControlName="password" type="password" class="form-control" placeholder="Ingresa la contraseña" />
+        <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"> 
+          <small class="text-danger">Contraseña requerida</small>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Registrarse</button>
     <!-- Ícono de regresar -->
-    <div class="back-icon">
+    <div class="back-icon text-center">
       <a href="/">
-        <img src="/home/lucianasosa/fotos figma/flecha.png" alt="Volver">
+        <img src="assets/flecha.png" alt="Volver" class="img-fluid" width="30">
       </a>
     </div>
 
-    <!-- Registro -->
-    <p class="register">¿No tienes una cuenta? <a href="/register">Regístrate ahora</a></p>
-  </div>
+    <!-- Inicio de sesión -->
+    <p class="text-center mt-3">¿Ya tienes una cuenta? <a href="/login">Inicia sesión aquí</a></p>
+</div>

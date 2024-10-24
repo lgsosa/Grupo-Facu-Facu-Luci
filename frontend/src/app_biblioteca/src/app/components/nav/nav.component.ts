@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class NavComponent {
 
+  constructor(
+    private authService: AuthService
+  ) {}
+
+  get isToken() {
+    return localStorage.getItem('token');
+  }  
+
+  cerrarSesion() {
+    this.authService.logout();
+  }
 }

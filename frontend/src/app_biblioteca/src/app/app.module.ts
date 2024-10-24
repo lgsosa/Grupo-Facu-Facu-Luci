@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router';  // Añadir RouterModule y Routes
-
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module'; 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
@@ -12,15 +10,11 @@ import { GestiondeusuarioComponent } from './pages/gestiondeusuario/gestiondeusu
 import { RegisterComponent } from './pages/register/register.component';
 import { PrestamosComponent } from './pages/prestamos/prestamos.component';
 import { LibroComponent } from './pages/libro/libro.component';
+import { LoginComponent } from './pages/login/login.component';
+import { ListaLibrosEstrellasComponent } from './pages/lista-libros-estrellas/lista-libros-estrellas.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-// Define tus rutas aquí
-const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'prestamos', component: PrestamosComponent },
-  { path: 'libro', component: LibroComponent },
-  { path: '**', component: ErrorPageComponent } // Ruta para manejar páginas no encontradas
-];
 
 @NgModule({
   declarations: [
@@ -32,12 +26,16 @@ const routes: Routes = [
     GestiondeusuarioComponent,
     RegisterComponent,
     PrestamosComponent,
-    LibroComponent
+    LibroComponent,
+    LoginComponent,
+    ListaLibrosEstrellasComponent
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
-    RouterModule.forRoot(routes)  // Añadir RouterModule con tus rutas
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

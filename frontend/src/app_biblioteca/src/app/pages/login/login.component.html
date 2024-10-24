@@ -1,0 +1,41 @@
+<app-nav></app-nav>
+<div class="container">
+    <!-- Logotipo -->
+    <div class="logo text-center">
+        <img src="assets/logo.png" alt="Logo" class="img-fluid">
+    </div>
+
+    <!-- Título -->
+    <h2 class="text-center">Iniciar sesión</h2>
+
+    <!-- Formulario de inicio de sesión -->
+    <form [formGroup]="loginForm" (ngSubmit)="submit()">
+        <div class="mb-3">
+            <label for="email" class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" formControlName="correo_electronico" id="email" placeholder="Tu correo electrónico">
+            <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"> 
+                <small class="text-danger">Correo electrónico inválido</small>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" formControlName="password" id="password" placeholder="Tu contraseña">
+            <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"> 
+                <small class="text-danger">Contraseña requerida</small>
+            </div>
+        </div>
+
+        <button type="button" (click)="submit()" class="btn btn-primary" [disabled]="loginForm.invalid">Ingresar</button>
+    </form>
+
+    <!-- Mensaje de registro -->
+    <p class="text-center mt-3">¿Aún no tienes una cuenta? <a routerLink="/home" href="#">Regístrate aquí</a></p>
+    
+    <!-- Ícono de regresar -->
+    <div class="back-icon text-center">
+        <a href="/">
+            <img src="assets/flecha.png" alt="Volver" class="img-fluid" width="30">
+        </a>
+    </div>
+</div>
+<app-footer></app-footer>
