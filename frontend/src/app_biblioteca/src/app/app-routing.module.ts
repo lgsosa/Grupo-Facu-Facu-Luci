@@ -8,17 +8,18 @@ import { PrestamosComponent } from './pages/prestamos/prestamos.component';
 import { LibroComponent } from './pages/libro/libro.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ListaLibrosEstrellasComponent } from './pages/lista-libros-estrellas/lista-libros-estrellas.component';
-import { AuthGuard } from './guards/auth.guard'; 
+import { AuthGuard } from './guards/auth.guard';
+import { RoleGuard } from './guards/role.guard'; // Importa RoleGuard
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'error_page', component: ErrorPageComponent },
-  { path: 'gestiondeusuario', component: GestiondeusuarioComponent, canActivate: [AuthGuard] }, 
+  { path: 'gestiondeusuario', component: GestiondeusuarioComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'ADMIN' } }, 
   { path: 'register', component: RegisterComponent },
-  { path: 'prestamos', component: PrestamosComponent, canActivate: [AuthGuard] },
-  { path: "libros", component: ListaLibrosEstrellasComponent },
+  { path: 'prestamos', component: PrestamosComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'BIBLIOTECARIO' } },
+  { path: 'libros', component: ListaLibrosEstrellasComponent },
   { path: 'login', component: LoginComponent },
-  { path: "libro/:id", component: LibroComponent },
+  { path: 'libro/:id', component: LibroComponent },
 
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: 'error_page' }
