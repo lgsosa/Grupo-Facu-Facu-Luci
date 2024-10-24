@@ -14,7 +14,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { ListaLibrosEstrellasComponent } from './pages/lista-libros-estrellas/lista-libros-estrellas.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { AuthService } from './services/auth.service';  // Servicio de autenticación
+import { AuthGuard } from './guards/auth.guard';       // Guard para autenticación
+import { RoleGuard } from './guards/role.guard';       // Guard para roles
 
 @NgModule({
   declarations: [
@@ -37,7 +39,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    AuthService,  // Asegúrate de proveer el servicio
+    AuthGuard,    // Guard de autenticación
+    RoleGuard     // Guard de roles
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

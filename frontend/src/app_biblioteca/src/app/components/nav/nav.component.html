@@ -11,8 +11,8 @@
         <li class="nav-item">
           <a class="nav-link" aria-current="page" routerLink="/prestamos" href="#">Préstamos</a>
         </li>
-        <li class="nav-item" *ngIf="isToken">
-          <a class="nav-link" routerLink="/usuarios" href="#">Usuarios</a>
+        <li class="nav-item" *ngIf="isAdminOrLibrarian">
+          <a class="nav-link" routerLink="/gestiondeusuario" href="#">Gestión de Usuarios</a>
         </li>
       </ul>
       <form class="d-flex">

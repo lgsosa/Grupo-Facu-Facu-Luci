@@ -20,33 +20,33 @@ export class LoginComponent {
       correo_electronico: ['', Validators.required],
       password: ['', Validators.required]
     })
-
   }
 
-  irAlLogin(dataLogin:any) {
+  irAlLogin(dataLogin: any) {
     this.authService.login(dataLogin).subscribe({
-      next: (rta:any) => {
+      next: (rta: any) => {
         alert('Credenciales correctas!!!');
         console.log('Exito: ', rta);
-        localStorage.setItem('token', rta.access_token);
+        this.authService.saveUserSession(rta.access_token, rta.role); // Guardar token y rol
         this.router.navigateByUrl('home');
-      }, error: (err:any) => {
+      },
+      error: (err: any) => {
         alert('Usuario o contraseña incorrecta.');
-        console.log('Exito: ', err);
+        console.log('Error: ', err);
         localStorage.removeItem('token');
-      }, complete: () => {
-        console.log('Fianlizo');
+      },
+      complete: () => {
+        console.log('Finalizó');
       }
     })
   }
 
   submit() {
-    if(this.loginForm.valid) {
-      console.log('Datos del formulario: ',this.loginForm.value);
+    if (this.loginForm.valid) {
+      console.log('Datos del formulario: ', this.loginForm.value);
       this.irAlLogin(this.loginForm.value);
     } else {
       alert('Los valores son requeridos');
     }
   }
-
 }
