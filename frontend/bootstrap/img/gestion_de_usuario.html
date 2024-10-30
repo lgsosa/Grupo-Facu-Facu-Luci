@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Usuarios</title>
+  
+  <!-- Incluye los dos archivos CSS -->
+  <link href="style.css" rel="stylesheet">
+  <link href="image-style.css" rel="stylesheet">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Enlazar CSS -->
+  <link href="../css/style.css" rel="stylesheet">
+
+</head>
+<body>
+  <!-- Barra superior con imagen -->
+  <div class="top-bar"></div>
+  <div class="container mt-5">
+    <h2>Gestión de Usuarios</h2>
+    
+    <!-- Botones para editar, eliminar y añadir -->
+    <div class="btn-group">
+      <button class="btn btn-secondary">Editar</button>
+      <button class="btn btn-secondary">Eliminar</button>
+      <button class="btn btn-secondary">Añadir</button>
+    </div>
+
+    <!-- Barra de búsqueda -->
+    <div class="search-bar">
+      <input type="text" class="form-control w-50" placeholder="Buscar usuarios">
+    </div>
+
+    <!-- Tabla de usuarios -->
+    <table class="table table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th>Nombre</th>
+          <th>Teléfono</th>
+          <th>ID</th>
+          <th>Correo Electrónico</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Jose</td>
+          <td>6546114</td>
+          <td>62495</td>
+          <td><a href="mailto:jose@gmail.com">jose@gmail.com</a></td>
+        </tr>
+        <tr>
+          <td>Marta</td>
+          <td>8744114</td>
+          <td>61578</td>
+          <td><a href="mailto:martita@gmail.com">martita@gmail.com</a></td>
+        </tr>
+        <tr>
+          <td>Pepe</td>
+          <td>64516147</td>
+          <td>62786</td>
+          <td><a href="mailto:pepe@gmail.com">pepe@gmail.com</a></td>
+        </tr>
+        <tr>
+          <td>Carla</td>
+          <td>5245424</td>
+          <td>26581</td>
+          <td><a href="mailto:carla@gmail.com">carla@gmail.com</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Paginación -->
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-secondary">←</button>
+      <button class="btn btn-secondary">Next →</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm

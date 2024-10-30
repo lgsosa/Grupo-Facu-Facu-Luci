@@ -1,0 +1,11 @@
+Hola {{usuario.nombre}} !
+
+Gracias por confiar en nosotros!
+
+Recuerda que con nuestro servicio podras:
+
+- Ver todos los libros
+- Ver los autores
+- Ver su historial
+- Ver sus prestamos
+- Editar su perfil
