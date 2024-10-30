@@ -8,15 +8,14 @@ import { PrestamosComponent } from './pages/prestamos/prestamos.component';
 import { LibroComponent } from './pages/libro/libro.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ListaLibrosEstrellasComponent } from './pages/lista-libros-estrellas/lista-libros-estrellas.component';
-import { AuthGuard } from './guards/auth.guard';
-import { RoleGuard } from './guards/role.guard'; // Importa RoleGuard
+import { authsessionrolGuard } from './guards/authsessionrol.guard';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'error_page', component: ErrorPageComponent },
-  { path: 'gestiondeusuario', component: GestiondeusuarioComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'ADMIN' } }, 
+  { path: 'gestiondeusuario', component: GestiondeusuarioComponent, canActivate: [authsessionrolGuard]}, 
   { path: 'register', component: RegisterComponent },
-  { path: 'prestamos', component: PrestamosComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'BIBLIOTECARIO' } },
+  { path: 'prestamos', component: PrestamosComponent, canActivate: [authsessionrolGuard] },
   { path: 'libros', component: ListaLibrosEstrellasComponent },
   { path: 'login', component: LoginComponent },
   { path: 'libro/:id', component: LibroComponent },

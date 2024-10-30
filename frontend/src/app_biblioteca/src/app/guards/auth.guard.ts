@@ -7,6 +7,9 @@ import { Route, Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
+  canActivate(): boolean {
+    return true;
+  }
   url = "/api";
 
   constructor(

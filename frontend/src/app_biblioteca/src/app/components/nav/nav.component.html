@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
   <div class="container-fluid">
-    <a class="navbar-brand active" routerLink="/home" href="#">
+    <a class="navbar-brand active" routerLink="/home">
       <i class="fa-solid fa-book"></i> Biblioteca
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,20 +9,20 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" routerLink="/prestamos" href="#">Préstamos</a>
+          <a class="nav-link" aria-current="page" routerLink="/prestamos">Préstamos</a>
         </li>
         <li class="nav-item" *ngIf="isAdminOrLibrarian">
-          <a class="nav-link" routerLink="/gestiondeusuario" href="#">Gestión de Usuarios</a>
+          <a class="nav-link" routerLink="/gestiondeusuario">Gestión de Usuarios</a>
         </li>
       </ul>
-      <form class="d-flex">
-        <a *ngIf="!isToken" class="nav-link" routerLink="/login" href="#">
+      <div class="d-flex">
+        <a *ngIf="!isToken" class="nav-link" routerLink="/login">
           <i class="fa-solid fa-user"></i> Login
         </a>
-        <a *ngIf="isToken" class="nav-link" (click)="cerrarSesion()" href="#">
+        <a *ngIf="isToken" class="nav-link" (click)="cerrarSesion()">
           <i class="fa-solid fa-user"></i> Cerrar sesión
         </a>
-      </form>
+      </div>
     </div>
   </div>
 </nav>
