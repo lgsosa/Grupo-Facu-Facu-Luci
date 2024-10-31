@@ -9,10 +9,17 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
+          <a class="nav-link" routerLink="/libros">Valoraciones</a>
+        </li>
+        <!-- Solo mostrar si el usuario es admin o bibliotecario -->
+        <li class="nav-item" *ngIf="isAdminOrLibrarian">
+          <a class="nav-link" routerLink="/gestiondeusuario">Gestión de Usuarios</a>
+        </li>
+        <li class="nav-item" *ngIf="isAdminOrLibrarian">
           <a class="nav-link" aria-current="page" routerLink="/prestamos">Préstamos</a>
         </li>
         <li class="nav-item" *ngIf="isAdminOrLibrarian">
-          <a class="nav-link" routerLink="/gestiondeusuario">Gestión de Usuarios</a>
+          <a class="nav-link" routerLink="/notificaciones">Notificaciones</a>
         </li>
       </ul>
       <div class="d-flex">

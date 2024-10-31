@@ -1,45 +1,61 @@
 <app-nav></app-nav>
 <div class="container">
-    <!-- Logotipo -->
     <div class="logo text-center">
-      <img src="assets/logo.png" alt="Logo" class="img-fluid">
+        <img src="../../assets/logo.png" alt="Logo" class="img-fluid">
     </div>
 
-    <!-- Título -->
     <h2 class="text-center">¡Regístrate para continuar!</h2>
 
-    <!-- Formulario de registro -->
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <div class="mb-3">
-        <label for="name" class="form-label">Nombre</label>
-        <input id="name" formControlName="name" type="text" class="form-control" placeholder="Ingresa tu nombre" />
-        <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched"> 
-          <small class="text-danger">Nombre requerido</small>
-        </div>
-      </div>
+    <!-- Mensaje de error -->
+    <div *ngIf="errorMessage" class="error-message text-danger">
+        {{ errorMessage }}
+    </div>
 
-      <div class="mb-3">
-        <label for="lastname" class="form-label">Apellido</label>
-        <input id="lastname" formControlName="lastname" type="text" class="form-control" placeholder="Ingresa tu apellido" />
-        <div *ngIf="registerForm.get('lastname')?.invalid && registerForm.get('lastname')?.touched"> 
-          <small class="text-danger">Apellido requerido</small>
+    <form *ngIf="canAddUsers" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input id="nombre" formControlName="nombre" type="text" class="form-control" placeholder="Ingresa tu nombre" />
+            <div *ngIf="registerForm.get('nombre')?.invalid && registerForm.get('nombre')?.touched"> 
+                <small class="text-danger">Nombre requerido</small>
+            </div>
         </div>
-      </div>
 
-      <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input id="email" formControlName="email" type="email" class="form-control" placeholder="Ingresa un email" />
-        <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"> 
-          <small class="text-danger">Email inválido</small>
+        <div class="mb-3">
+            <label for="telefono" class="form-label">Teléfono</label>
+            <input id="telefono" formControlName="telefono" type="number" class="form-control" placeholder="Ingresa tu teléfono" />
+            <div *ngIf="registerForm.get('telefono')?.invalid && registerForm.get('telefono')?.touched"> 
+                <small class="text-danger">Teléfono requerido</small>
+            </div>
         </div>
-      </div>
 
-      <div class="mb-3">
-        <label for="password" class="form-label">Contraseña</label>
-        <input id="password" formControlName="password" type="password" class="form-control" placeholder="Ingresa la contraseña" />
-        <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"> 
-          <small class="text-danger">Contraseña requerida</small>
+        <div class="mb-3">
+            <label for="correo_electronico" class="form-label">Email</label>
+            <input id="correo_electronico" formControlName="correo_electronico" type="email" class="form-control" placeholder="Ingresa un email" />
+            <div *ngIf="registerForm.get('correo_electronico')?.invalid && registerForm.get('correo_electronico')?.touched"> 
+                <small class="text-danger">Email inválido</small>
+            </div>
         </div>
-      </div>
 
-    
+        <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input id="password" formControlName="password" type="password" class="form-control" placeholder="Ingresa la contraseña" />
+            <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"> 
+                <small class="text-danger">Contraseña requerida</small>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="rol" class="form-label">Rol</label>
+            <input id="rol" formControlName="rol" type="text" class="form-control" placeholder="Ingresa el rol (e.g., admin)" />
+            <div *ngIf="registerForm.get('rol')?.invalid && registerForm.get('rol')?.touched"> 
+                <small class="text-danger">Rol requerido</small>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Registrarse</button>
+    </form>
+
+    <div *ngIf="!canAddUsers" class="text-danger">
+        Regístrese en la biblioteca para acceder a esta función.
+    </div>
+</div>

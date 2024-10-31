@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,4 +23,9 @@ export class GestiondeusuariosService {
     const requestOptions = {headers: headers}
     return this.HttpClient.get(this.url+ '/usuarios', requestOptions);
 }
+
+  addUser(nuevoUsuario: any): Observable<any>  {
+    return this.HttpClient.post<any>(`${this.url}/usuarios`, nuevoUsuario); // Asegúrate de que esta ruta sea correcta
+  }
+
 }

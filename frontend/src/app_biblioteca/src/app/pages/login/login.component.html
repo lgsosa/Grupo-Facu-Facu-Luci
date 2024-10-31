@@ -1,14 +1,11 @@
 <app-nav></app-nav>
 <div class="container">
-    <!-- Logotipo -->
     <div class="logo text-center">
         <img src="assets/logo.png" alt="Logo" class="img-fluid">
     </div>
 
-    <!-- Título -->
     <h2 class="text-center">Iniciar sesión</h2>
 
-    <!-- Formulario de inicio de sesión -->
     <form [formGroup]="loginForm" (ngSubmit)="submit()">
         <div class="mb-3">
             <label for="email" class="form-label">Correo electrónico</label>
@@ -28,10 +25,8 @@
         <button type="button" (click)="submit()" class="btn btn-primary" [disabled]="loginForm.invalid">Ingresar</button>
     </form>
 
-    <!-- Mensaje de registro -->
-    <p class="text-center mt-3">¿Aún no tienes una cuenta? <a routerLink="/home" href="#">Regístrate aquí</a></p>
+    <p class="text-center mt-3">¿Aún no tienes una cuenta? <a routerLink="/register" href="#">Regístrate aquí</a></p>
     
-    <!-- Ícono de regresar -->
     <div class="back-icon text-center">
         <a href="/">
             <img src="assets/flecha.png" alt="Volver" class="img-fluid" width="30">

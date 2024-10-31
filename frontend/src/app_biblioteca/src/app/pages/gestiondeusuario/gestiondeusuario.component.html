@@ -1,19 +1,28 @@
 <app-nav></app-nav>
 
 <div class="container mt-5">
-  <h2 class="text-center mb-4">Gestión de Usuarios</h2>
+  <h2>Gestión de Usuarios</h2>
 
-  <!-- Barra de búsqueda y botón de añadir -->
-  <div class="d-flex mb-3">
-    <input type="text" (input)="buscar()" class="form-control me-2 flex-grow-1" [(ngModel)]="searchQuery" placeholder="Buscar usuarios...">
-    <button class="btn btn-secondary" (click)="buscar()"><i class="fa-solid fa-magnifying-glass"></i></button>
-    <a class="btn btn-primary ms-2" routerLink="/usuario/null/Alta">
-      <i class="fa-solid fa-plus"></i>
-    </a>
+  <!-- Botones para editar, eliminar y añadir -->
+  <div class="btn-group">
+    <button class="btn btn-secondary" (click)="null">Editar</button>
+    <button class="btn btn-secondary" (click)="null">Eliminar</button>
+    <button class="btn btn-secondary" (click)="guardarUsuario(nuevoUsuario)">Añadir</button>
+  </div>
+
+  <!-- Barra de búsqueda -->
+  <div class="search-bar mb-3">
+    <input 
+      type="text" 
+      (input)="buscar()" 
+      class="form-control w-50" 
+      [(ngModel)]="searchQuery" 
+      placeholder="Buscar usuarios..."
+    >
   </div>
 
   <!-- Tabla de usuarios -->
-  <table class="table table-bordered mb-3">
+  <table class="table table-bordered">
     <thead class="table-light">
       <tr>
         <th>Nombre</th>
@@ -30,7 +39,7 @@
         <td>{{usuario.id}}</td>
         <td>{{usuario.email}}</td>
         <td>
-          <button class="btn btn-primary btn-sm me-2" (click)="editarusuario(usuario)">
+          <button class="btn btn-primary btn-sm" (click)="editarusuario(usuario)">
             <i class="fa-solid fa-pen-to-square"></i>
           </button>
         </td>
@@ -39,6 +48,10 @@
   </table>
 
   <!-- Paginación -->
+  <div class="d-flex justify-content-between mt-3">
+    <button class="btn btn-secondary" (click)="paginacionAnterior()">←</button>
+    <button class="btn btn-secondary" (click)="paginacionSiguiente()">Next →</button>
+  </div>
 </div>
 
 <!-- Modal para agregar nuevo usuario -->
@@ -50,20 +63,24 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form #usuarioForm="ngForm" (ngSubmit)="guardarUsuario(usuarioForm)">
           <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombre">
+            <input type="text" class="form-control" id="nombre" [(ngModel)]="nuevoUsuario.name" name="name" required>
+          </div>
+          <div class="mb-3">
+            <label for="telefono" class="form-label">Teléfono</label>
+            <input type="text" class="form-control" id="telefono" [(ngModel)]="nuevoUsuario.phone" name="phone" required>
           </div>
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email">
+            <input type="email" class="form-control" id="email" [(ngModel)]="nuevoUsuario.email" name="email" required>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Guardar</button>
+        <button type="button" class="btn btn-primary" (click)="guardarUsuario(usuarioForm)">Guardar</button>
       </div>
     </div>
   </div>

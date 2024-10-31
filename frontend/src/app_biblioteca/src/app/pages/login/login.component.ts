@@ -27,7 +27,7 @@ export class LoginComponent {
       next: (rta: any) => {
         alert('Credenciales correctas!!!');
         console.log('Exito: ', rta);
-        this.authService.saveUserSession(rta.access_token, rta.role); // Guardar token y rol
+        this.authService.saveUserSession(rta.access_token, rta.rol); // Guardar token y rol
         this.router.navigateByUrl('home');
       },
       error: (err: any) => {

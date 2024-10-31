@@ -14,9 +14,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { ListaLibrosEstrellasComponent } from './pages/lista-libros-estrellas/lista-libros-estrellas.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from './service/auth.service';  // Servicio de autenticación
-import { RoleGuard } from './guards/role.guard';       // Guard para roles
-   // Guard para autenticación
+import { AuthService } from './service/auth.service'; 
+import { RoleGuard } from './guards/role.guard';
+import { NotificacionesComponent } from './pages/notificaciones/notificaciones.component';   
 
 
 @NgModule({
@@ -31,7 +31,8 @@ import { RoleGuard } from './guards/role.guard';       // Guard para roles
     PrestamosComponent,
     LibroComponent,
     LoginComponent,
-    ListaLibrosEstrellasComponent
+    ListaLibrosEstrellasComponent,
+    NotificacionesComponent
   ],
   imports: [
     BrowserModule,

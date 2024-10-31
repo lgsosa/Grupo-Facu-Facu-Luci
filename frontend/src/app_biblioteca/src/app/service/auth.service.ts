@@ -16,18 +16,17 @@ export class AuthService {
     ) {}
 
   login(dataLogin:any): Observable<any> {
-    //let dataLogin = {
-    //  email: "lucianagsosa03@gmail.com",
-    //  password: "123456789"
-    //}
     return this.HttpClient.post(this.url + '/auth/login', dataLogin).pipe(take(1));
+  }
+
+  register(userData: any): Observable<any> {
+    return this.HttpClient.post(this.url + '/auth/register', userData);
   }
 
   logout() {
     localStorage.removeItem('token');
     this.router.navigateByUrl('home');
   }
-
 
   saveUserSession(token: string, rol: string): void {
       // tengo que implenetar la lógica para guardar la sesión del usuario
@@ -37,18 +36,23 @@ export class AuthService {
 
   isAdminOrLibrarian(): boolean {
       const token = localStorage.getItem('token');
-      if (!token) {
-        return false; // No hay token, el usuario no está autenticado
+      const rol = localStorage.getItem('rol'); // Obtén el rol de localStorage
+      if (!token || !rol) {
+          return false; // No hay token o rol, el usuario no está autenticado
       }
   
       try {
-        const decoded:any = jwtDecode(token);
-        console.log("jwt decode",decoded)
-        // Asumiendo que en el payload del token tienes un campo 'role'
-        return decoded.rol === 'admin' || decoded.rol === 'librarian';
+          const decoded: any = jwtDecode(token);
+          console.log("jwt decode", decoded);
+          console.log(`Rol almacenado: ${rol}`); // Muestra el rol almacenado
+          return rol === 'admin' || rol === 'librarian'; // Usa el rol almacenado
       } catch (error) {
-        console.error('Error al decodificar el token', error);
-        return false; // Si hay un error, no es admin ni bibliotecario
+          console.error('Error al decodificar el token', error);
+          return false; // Si hay un error, no es admin ni bibliotecario
       }
-    }
+  }  
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
   }
