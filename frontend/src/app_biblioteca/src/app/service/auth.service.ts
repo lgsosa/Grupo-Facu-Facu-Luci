@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'URL_DEL_BACKEND'; // Cambia a la URL real de tu backend
+  private apiUrl = '...'; // Cambia a la URL real de tu backend
 
   constructor(private http: HttpClient) {}
 
