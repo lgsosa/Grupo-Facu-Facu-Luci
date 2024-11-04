@@ -1,24 +1,33 @@
-from .. import db 
+from .. import db
 
-class Valoracion(db.Model):
+class Reseñas (db.Model):
+
+    __tablereseñas__ = "reseñas"
     id = db.Column(db.Integer, primary_key=True)
-    nombre = db.Column(db.String(100), nullable = False)
     valoracion = db.Column(db.Integer, nullable=False)
+    comentario = db.Column(db.String(100), nullable = False) 
+
+    #clave foranea
+
+    id_libro = db.Column(db.Integer, db.ForeignKey("libros.id"), nullable=False)
+
+    libros = db.relationship("Libros", back_populates="reseñas", uselist = False, single_parent =True)
+
+    usuarios = db.relationship("Usuario", secondary = "usuario_reseñas", back_populates="reseñas")
 
     def to_json(self):
-        prestamos_json = {
-            "id": self.id,
-            "nombre_del_libro": str(self.nombre),
-            "valoracion": self.valoracion,
-
-        }
-        return prestamos_json
+        libros_json = {
+            "libro": self.id,
+            "valoracion ": self.valoracion,
+            "comentario": str(self.comentario)
+        }   
+        return libros_json
     
-    @staticmethod
-    def from_json(valoracion_json):
-        id = valoracion_json.get('id')
-        nombre = valoracion_json.get('nombre_del_libro')
-        valoracion = valoracion_json.get('valoracion')
-        return Valoracion(id=id,
-                          nombre=nombre,
-                          valoracion=valoracion)
+usuario_reseñas = db.Table(
+    "usuario_reseñas",
+
+    db.Column("usuario_id", db.Integer, db.ForeignKey("usuario.id")),
+    db.Column ("reseñas_id", db.Integer, db.ForeignKey("reseñas.id"))
+
+
+)

@@ -1,57 +1,37 @@
 from .. import db
-from datetime import datetime
 
-class Prestamos (db.Model):
+class Notificaciones(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    nombre_usuario  = db.Column(db.String(100), nullable = False)
-    cantidad = db.Column(db.Integer, nullable=False)
-    tiempo_de_devolucion = db.Column(db.Integer, nullable=False)
-    fecha_inicio = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)  # Nuevo campo
-    #clave foranea
-
-    id_usuario = db.Column(db.Integer, db.ForeignKey("usuario.id"), nullable=False)
-    id_libro = db.Column(db.Integer, db.ForeignKey("libros.id"), nullable=False)
-
-    #nombre de la relacion
+    notificacion = db.Column(db.String(100), nullable=False)
     
-    usuario = db.relationship("Usuario", back_populates="prestamos", uselist = False, single_parent =True)
-    libros = db.relationship("Libros", back_populates="prestamos", uselist = False, single_parent =True)
+    # Clave foránea
+    id_usuario = db.Column(db.Integer, db.ForeignKey("usuario.id"), nullable=False)
+
+    # Nombre de la relación
+    usuario = db.relationship("Usuario", back_populates="notificaciones")
 
     def to_json_short(self):
-        prestamos_json = {
+        notificaciones_json = {
             "id": self.id,
-            "nombre_usuario": str(self.nombre_usuario),
-            "cantidad": self.cantidad,
-            "tiempo_de_devolucion": (self.tiempo_de_devolucion),
-        }   
-        return prestamos_json
-
+            "notificacion": self.notificacion
+        }
+        return notificaciones_json
 
     def to_json(self):
-        prestamos_json = {
+        notificaciones_json = {
             "id": self.id,
-            "nombre_usuario": str(self.nombre_usuario),
-            "cantidad": self.cantidad,
-            "tiempo_de_devolucion": (self.tiempo_de_devolucion),
-            "usuario" : self.usuario.to_json(), #le paso el usuario pasado a JSON / tengo todos los datos juntos 
-            "libros" :self.libros.to_json()
-        }   
-        return prestamos_json
-    
+            "notificacion": self.notificacion,
+            "usuario": self.usuario.to_json() if self.usuario else None
+        }
+        return notificaciones_json
 
     @staticmethod
-    def from_json(prestamos_json):
-        id = prestamos_json.get('id')
-        nombre_usuario = prestamos_json.get('nombre_usuario')
-        cantidad = prestamos_json.get('cantidad')
-        tiempo_de_devolucion = prestamos_json.get('tiempo_de_devolucion')
-        id_usuario = prestamos_json.get('id_usuario')
-        id_libro = prestamos_json.get('id_libro')
-        return Prestamos(
+    def from_json(notificacion_json):
+        id = notificacion_json.get('id')
+        notificacion = notificacion_json.get('notificacion')
+        id_usuario = notificacion_json.get('id_usuario')
+        return Notificaciones(
             id=id,
-            nombre_usuario=nombre_usuario,
-            cantidad=cantidad,
-            tiempo_de_devolucion=tiempo_de_devolucion,
-            id_usuario=id_usuario,
-            id_libro=id_libro
+            notificacion=notificacion,
+            id_usuario=id_usuario
         )
