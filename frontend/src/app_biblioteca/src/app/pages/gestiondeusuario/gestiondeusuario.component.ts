@@ -1,79 +1,75 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { GestiondeusuariosService } from '../../service/gestiondeusuarios.service';
+import { Component, OnInit } from '@angular/core';
+import { GestionDeUsuarioService } from '../../service/gestiondeusuario.service';
 
 @Component({
   selector: 'app-gestiondeusuario',
   templateUrl: './gestiondeusuario.component.html',
-  styleUrls: ['./gestiondeusuario.component.scss'] // Corregido de styleUrl a styleUrls
+  styleUrls: ['./gestiondeusuario.component.scss']
 })
-export class GestiondeusuarioComponent {
-  searchQuery = '';
-  
-  arrayUsuarios: any[] = [];
-  filteredUsers: any[] = [];
-  nuevoUsuario: any = {
-    name: '',
-    phone: '',
-    email: ''
-  };
+export class GestiondeusuarioComponent implements OnInit {
+  usuarios: any[] = [];  // Lista de usuarios
+  nuevoUsuario: any = {}; // Objeto para crear un nuevo usuario
+  usuarioSeleccionado: any = null; // Usuario seleccionado para editar
 
-  currentPage: number = 1; // Variable para manejar la paginación
+  constructor(private gestionDeUsuarioService: GestionDeUsuarioService) {}
 
-  constructor(
-    private router: Router,
-    private gestiondeusuarios: GestiondeusuariosService
-  ) {}
-
-  ngOnInit() {
-    this.gestiondeusuarios.getUsers().subscribe((rta: any) => {
-      console.log('usuarios api: ', rta);
-      this.arrayUsuarios = rta.usuarios || [];
-      this.filteredUsers = [...this.arrayUsuarios];
-    });
-  }
-  
-  editarusuario(user: any) {
-    console.log('Estoy editando', user);
-    this.router.navigate(['/usuario' + user.id + '/editar']);
+  ngOnInit(): void {
+    this.obtenerUsuarios();
   }
 
-  buscar() {
-    console.log('buscar: ', this.searchQuery);
-    this.filteredUsers = this.arrayUsuarios.filter(user => user.name.includes(this.searchQuery));
+  obtenerUsuarios() {
+      this.gestionDeUsuarioService.getUsuarios().subscribe(data => {
+        console.log(data);  // Verifica la respuesta completa en la consola
+        this.usuarios = data.usuarios;
+      }, error => {
+        console.error('Error al cargar los usuarios', error);
+      });
+    }
+
+
+  guardarUsuario(): void {
+    this.gestionDeUsuarioService.crearUsuario(this.nuevoUsuario).subscribe(
+      (response) => {
+        this.obtenerUsuarios(); // Actualiza la lista después de añadir un nuevo usuario
+        this.nuevoUsuario = {}; // Resetea el formulario
+      },
+      (error) => {
+        console.error('Error creating user', error);
+      }
+    );
   }
 
-  // Método para paginación anterior
-  paginacionAnterior() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.updateFilteredUsers();
+  editarUsuario(usuario: any): void {
+    this.usuarioSeleccionado = { ...usuario }; // Clona el usuario seleccionado
+  }
+
+  actualizarUsuario(): void {
+    if (this.usuarioSeleccionado) {
+      this.gestionDeUsuarioService.editarUsuario(this.usuarioSeleccionado.id, this.usuarioSeleccionado).subscribe(
+        (response) => {
+          this.obtenerUsuarios(); // Actualiza la lista después de la edición
+          this.usuarioSeleccionado = null; // Resetea la edición
+        },
+        (error) => {
+          console.error('Error updating user', error);
+        }
+      );
     }
   }
 
-  // Método para paginación siguiente
-  paginacionSiguiente() {
-    this.currentPage++;
-    this.updateFilteredUsers();
+  eliminarUsuario(id: number): void {
+    this.gestionDeUsuarioService.eliminarUsuario(id).subscribe(
+      (response) => {
+        this.obtenerUsuarios(); // Actualiza la lista después de la eliminación
+      },
+      (error) => {
+        console.error('Error deleting user', error);
+      }
+    );
   }
 
-  // Método para guardar un nuevo usuario
-  guardarUsuario(form: any) {
-    console.log('Guardando usuario', this.nuevoUsuario);
-    // Aquí puedes implementar la lógica para guardar el nuevo usuario
-    // Por ejemplo, llamar a un servicio que envíe los datos al backend
-    this.gestiondeusuarios.addUser(this.nuevoUsuario).subscribe((response: any) => {
-      console.log('Usuario guardado:', response);
-      // Reiniciar el formulario y actualizar la lista de usuarios
-      this.nuevoUsuario = { name: '', phone: '', email: '' };
-      this.ngOnInit(); // Refrescar la lista de usuarios
-    });
+  // Este método se llama antes de eliminar para seleccionar el usuario.
+  seleccionarUsuario(usuario: any): void {
+    this.usuarioSeleccionado = usuario; // Guarda el usuario seleccionado
   }
-
-  // Método para actualizar la lista de usuarios filtrados según la página actual
-  private updateFilteredUsers() {
-    // Aquí implementa la lógica para filtrar los usuarios según la paginación
-    // Por ejemplo, puedes utilizar slice para mostrar solo un número limitado de usuarios por página
-  }
-  
 }

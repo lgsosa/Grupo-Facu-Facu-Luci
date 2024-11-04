@@ -1,58 +1,79 @@
 <app-nav></app-nav>
-<div class="container mt-5">
-    <h2>Gestión de Préstamos</h2>
-    
-    <!-- Botones para editar, eliminar y añadir -->
-    <div class="btn-group">
-      <button class="btn btn-secondary">Editar</button>
-      <button class="btn btn-secondary">Eliminar</button>
-      <button class="btn btn-secondary">Añadir</button>
-    </div>
+<div class="container">
+  <h2>Gestión de Préstamos</h2>
 
-    <!-- Barra de búsqueda -->
-    <div class="search-bar">
-      <input type="text" class="form-control w-50" placeholder="Buscar usuarios">
+  <form (ngSubmit)="guardarPrestamo()">
+    <div class="form-group">
+      <label>Nombre del Usuario</label>
+      <input type="text" [(ngModel)]="nuevoPrestamo.nombre_usuario" name="nombre_usuario" required class="form-control">
     </div>
-
-    <!-- Tabla de préstamos -->
-    <table class="table table-bordered">
-      <thead class="table-light">
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Cantidad</th>
-          <th>Tiempo de devolución</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>62495</td>
-          <td>Jose</td>
-          <td>1</td>
-          <td>20/08/2024</td>
-        </tr>
-        <tr>
-          <td>61578</td>
-          <td>Jazmin</td>
-          <td>2</td>
-          <td>20/08/2024</td>
-        </tr>
-        <tr>
-          <td>Pepe</td>
-          <td>vencido</td>
-          <td>4</td>
-          <td>10/08/2024</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <!-- Botón para enviar recordatorio -->
-    <div class="reminder-btn">
-      <button class="btn btn-secondary">Enviar recordatorio</button>
+    <div class="form-group">
+      <label>Cantidad</label>
+      <input type="number" [(ngModel)]="nuevoPrestamo.cantidad" name="cantidad" required class="form-control" min="1">
     </div>
-
-    <!-- Paginación -->
-    <div class="d-flex justify-content-between mt-3">
-      <button class="btn btn-secondary">←</button>
-      <button class="btn btn-secondary">Next →</button>
+    <div class="form-group">
+      <label>Tiempo de Devolución (días)</label>
+      <input type="number" [(ngModel)]="nuevoPrestamo.tiempo_de_devolucion" name="tiempo_de_devolucion" required class="form-control" min="1">
     </div>
+    <div class="form-group">
+      <label>ID Usuario</label>
+      <input type="text" [(ngModel)]="nuevoPrestamo.id_usuario" name="id_usuario" required class="form-control">
+    </div>
+    <div class="form-group">
+      <label>ID Libro</label>
+      <input type="text" [(ngModel)]="nuevoPrestamo.id_libro" name="id_libro" required class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Correo Electrónico</label>
+      <input type="email" [(ngModel)]="nuevoPrestamo.correo_electronico" name="correo_electronico" required class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Añadir Préstamo</button>
+  </form>
+
+  <hr>
+
+  <h3>Lista de Préstamos</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre Usuario</th>
+        <th>Cantidad</th>
+        <th>Tiempo Devolución</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prestamo of prestamos">
+        <td>{{ prestamo.id }}</td>
+        <td>{{ prestamo.nombre_usuario }}</td>
+        <td>{{ prestamo.cantidad }}</td>
+        <td>{{ prestamo.tiempo_de_devolucion }}</td>
+        <td>
+          <button class="btn btn-warning" (click)="editarPrestamo(prestamo)">Editar</button>
+          <button class="btn btn-danger" (click)="eliminarPrestamo(prestamo)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="prestamoEditado">
+    <h4>Editar Préstamo</h4>
+    <form (ngSubmit)="actualizarPrestamo()">
+      <div class="form-group">
+        <label>Nombre del Usuario</label>
+        <input type="text" [(ngModel)]="prestamoEditado.nombre_usuario" name="nombre_usuario_edit" required class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Cantidad</label>
+        <input type="number" [(ngModel)]="prestamoEditado.cantidad" name="cantidad_edit" required class="form-control" min="1">
+      </div>
+      <div class="form-group">
+        <label>Tiempo de Devolución (días)</label>
+        <input type="number" [(ngModel)]="prestamoEditado.tiempo_de_devolucion" name="tiempo_de_devolucion_edit" required class="form-control" min="1">
+      </div>
+      <button type="submit" class="btn btn-primary">Actualizar Préstamo</button>
+      <button type="button" class="btn btn-secondary" (click)="prestamoEditado = null">Cancelar</button>
+    </form>
+  </div>
+</div>

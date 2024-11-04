@@ -2,50 +2,40 @@ import { Component } from '@angular/core';
 
 interface Notificacion {
   texto: string;
-  id_usuario: number;
+  id_usuario: number | null; // Asegúrate de que esto sea correcto
 }
 
 @Component({
-  selector: 'app-notificaciones',
+  selector: 'app-notificaciones', // Verifica que el selector sea único
   templateUrl: './notificaciones.component.html',
-  styleUrls: ['./notificaciones.component.scss'],
+  styleUrls: ['./notificaciones.component.scss'] // Asegúrate de que este archivo exista o elimina esta línea
 })
+
+
 export class NotificacionesComponent {
-  notificacion: string = '';
-  id_usuario: number | null = null;
+  notificacion: Notificacion = { texto: '', id_usuario: null };
+  editIndex: number | null = null;
+  editMode: boolean = false; // Añadir esta línea
   notificaciones: Notificacion[] = [];
-  editarIndex: number | null = null;
 
-  onSubmit() {
-    if (this.editarIndex !== null) {
-      // Modificar notificación existente
-      this.notificaciones[this.editarIndex] = {
-        texto: this.notificacion,
-        id_usuario: this.id_usuario!,
-      };
-      this.editarIndex = null; // Reiniciar índice de edición
+  agregarNotificacion() {
+    if (this.editIndex !== null) {
+      this.notificaciones[this.editIndex] = { ...this.notificacion };
+      this.editIndex = null;
+      this.editMode = false; // Resetear editMode al guardar cambios
     } else {
-      // Agregar nueva notificación
-      this.notificaciones.push({
-        texto: this.notificacion,
-        id_usuario: this.id_usuario!,
-      });
+      this.notificaciones.push({ ...this.notificacion });
     }
-
-    // Reiniciar los campos
-    this.notificacion = '';
-    this.id_usuario = null;
+    this.notificacion = { texto: '', id_usuario: null };
   }
 
   editarNotificacion(index: number) {
-    this.editarIndex = index;
-    this.notificacion = this.notificaciones[index].texto;
-    this.id_usuario = this.notificaciones[index].id_usuario;
+    this.editIndex = index;
+    this.notificacion = { ...this.notificaciones[index] };
+    this.editMode = true; // Activar editMode al editar
   }
 
-  eliminarNotificacion(notificacion: Notificacion) {
-    this.notificaciones = this.notificaciones.filter(
-      (n) => n !== notificacion
-    );
+  eliminarNotificacion(index: number) {
+    this.notificaciones.splice(index, 1);
   }
 }

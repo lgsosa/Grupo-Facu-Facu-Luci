@@ -39,12 +39,13 @@ class Usuario(db.Model):
     def to_json(self):
         usuario_json = {
             "id": self.id,
-            "nombre ": str(self.nombre),
+            "nombre": str(self.nombre),  # Corrige el nombre de la clave
             "telefono": self.telefono,
             "correo_electronico": str(self.correo_electronico),
-
+            "rol": str(self.rol)  # Agrega el rol aquí
         }
         return usuario_json
+
     
     def to_json_complete (self):
         prestamos = [prestamo.to_json() for prestamo in self.prestamos]

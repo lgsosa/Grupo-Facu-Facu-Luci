@@ -1,87 +1,81 @@
 <app-nav></app-nav>
-
-<div class="container mt-5">
+<div class="container">
   <h2>Gestión de Usuarios</h2>
 
-  <!-- Botones para editar, eliminar y añadir -->
-  <div class="btn-group">
-    <button class="btn btn-secondary" (click)="null">Editar</button>
-    <button class="btn btn-secondary" (click)="null">Eliminar</button>
-    <button class="btn btn-secondary" (click)="guardarUsuario(nuevoUsuario)">Añadir</button>
-  </div>
+  <form (ngSubmit)="guardarUsuario()">
+    <div class="form-group">
+      <label>Nombre y Apellido</label>
+      <input type="text" [(ngModel)]="nuevoUsuario['nombre y apellido']" name="nombre" required class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Teléfono</label>
+      <input type="tel" [(ngModel)]="nuevoUsuario.telefono" name="telefono" required class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Correo Electrónico</label>
+      <input type="email" [(ngModel)]="nuevoUsuario['correo electronico']" name="correo" required class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Contraseña</label>
+      <input type="password" [(ngModel)]="nuevoUsuario.password" name="password" required class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Rol</label>
+      <input type="text" [(ngModel)]="nuevoUsuario.rol" name="rol" required class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Añadir Usuario</button>
+  </form>
 
-  <!-- Barra de búsqueda -->
-  <div class="search-bar mb-3">
-    <input 
-      type="text" 
-      (input)="buscar()" 
-      class="form-control w-50" 
-      [(ngModel)]="searchQuery" 
-      placeholder="Buscar usuarios..."
-    >
-  </div>
+  <hr>
 
-  <!-- Tabla de usuarios -->
-  <table class="table table-bordered">
-    <thead class="table-light">
+  <h3>Lista de Usuarios</h3>
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <th>Nombre</th>
-        <th>Teléfono</th>
         <th>ID</th>
+        <th>Nombre y Apellido</th>
+        <th>Teléfono</th>
         <th>Correo Electrónico</th>
+        <th>Rol</th>
         <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let usuario of filteredUsers">
-        <td>{{usuario.name}}</td>
-        <td>{{usuario.phone}}</td>
-        <td>{{usuario.id}}</td>
-        <td>{{usuario.email}}</td>
+      <tr *ngFor="let usuario of usuarios">
+        <td>{{ usuario.id }}</td>
+        <td>{{ usuario.nombre}}</td>
+        <td>{{ usuario.telefono }}</td>
+        <td>{{ usuario.correo_electronico }}</td>
+        <td>{{ usuario.rol }}</td>
         <td>
-          <button class="btn btn-primary btn-sm" (click)="editarusuario(usuario)">
-            <i class="fa-solid fa-pen-to-square"></i>
-          </button>
+          <button class="btn btn-warning" (click)="editarUsuario(usuario)">Editar</button>
+          <button class="btn btn-danger" (click)="eliminarUsuario(usuario.id)">Eliminar</button>
         </td>
       </tr>
     </tbody>
   </table>
 
-  <!-- Paginación -->
-  <div class="d-flex justify-content-between mt-3">
-    <button class="btn btn-secondary" (click)="paginacionAnterior()">←</button>
-    <button class="btn btn-secondary" (click)="paginacionSiguiente()">Next →</button>
-  </div>
-</div>
-
-<!-- Modal para agregar nuevo usuario -->
-<div class="modal fade" id="nuevoUsuarioModal" tabindex="-1" aria-labelledby="nuevoUsuarioModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="nuevoUsuarioModalLabel">Agregar Nuevo Usuario</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <div *ngIf="usuarioSeleccionado">
+    <h4>Editar Usuario</h4>
+    <form (ngSubmit)="actualizarUsuario()">
+      <div class="form-group">
+        <label>Nombre y Apellido</label>
+        <input type="text" [(ngModel)]="usuarioSeleccionado['nombre y apellido']" name="nombre_edit" required class="form-control">
       </div>
-      <div class="modal-body">
-        <form #usuarioForm="ngForm" (ngSubmit)="guardarUsuario(usuarioForm)">
-          <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombre" [(ngModel)]="nuevoUsuario.name" name="name" required>
-          </div>
-          <div class="mb-3">
-            <label for="telefono" class="form-label">Teléfono</label>
-            <input type="text" class="form-control" id="telefono" [(ngModel)]="nuevoUsuario.phone" name="phone" required>
-          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" [(ngModel)]="nuevoUsuario.email" name="email" required>
-          </div>
-        </form>
+      <div class="form-group">
+        <label>Teléfono</label>
+        <input type="tel" [(ngModel)]="usuarioSeleccionado.telefono" name="telefono_edit" required class="form-control">
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" (click)="guardarUsuario(usuarioForm)">Guardar</button>
+      <div class="form-group">
+        <label>Correo Electrónico</label>
+        <input type="email" [(ngModel)]="usuarioSeleccionado['correo electronico']" name="correo_edit" required class="form-control">
       </div>
-    </div>
+      <div class="form-group">
+        <label>Rol</label>
+        <input type="text" [(ngModel)]="usuarioSeleccionado.rol" name="rol_edit" required class="form-control">
+      </div>
+      <button type="submit" class="btn btn-primary">Actualizar Usuario</button>
+      <button type="button" class="btn btn-secondary" (click)="usuarioSeleccionado = null">Cancelar</button>
+    </form>
   </div>
 </div>

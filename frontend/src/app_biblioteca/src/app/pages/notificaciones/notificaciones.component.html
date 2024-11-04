@@ -1,40 +1,37 @@
-<app-nav></app-nav>
-<div class="notificaciones-container">
-  <h2>Notificaciones</h2>
-  <form (ngSubmit)="onSubmit()" class="form">
+<div class="container">
+  <h1>Notificaciones</h1>
+
+  <form (ngSubmit)="agregarNotificacion()">
     <div class="form-group">
-      <label for="notificacion">Notificación:</label>
-      <input
-        type="text"
-        id="notificacion"
-        [(ngModel)]="notificacion"
-        name="notificacion"
-        required
-        class="form-control"
-      />
+      <label for="texto">Texto de Notificación:</label>
+      <input type="text" id="texto" [(ngModel)]="notificacion.texto" name="texto" class="form-control" required>
     </div>
+
     <div class="form-group">
       <label for="id_usuario">ID Usuario:</label>
-      <input
-        type="number"
-        id="id_usuario"
-        [(ngModel)]="id_usuario"
-        name="id_usuario"
-        required
-        class="form-control"
-      />
+      <input type="number" id="id_usuario" [(ngModel)]="notificacion.id_usuario" name="id_usuario" class="form-control" required>
     </div>
-    <button type="submit" class="btn btn-primary">Guardar</button>
+
+    <button type="submit" class="btn btn-primary mt-3">{{ editMode ? 'Guardar Cambios' : 'Agregar Notificación' }}</button>
   </form>
 
-  <div class="notificaciones-list">
-    <h3>Lista de Notificaciones</h3>
-    <ul>
-      <li *ngFor="let notificacion of notificaciones; let i = index">
-        {{ notificacion.texto }} (ID: {{ notificacion.id_usuario }})
-        <button (click)="editarNotificacion(i)" class="btn btn-warning">Editar</button>
-        <button (click)="eliminarNotificacion(notificacion)" class="btn btn-danger">Eliminar</button>
-      </li>
-    </ul>
-  </div>
+  <table class="table mt-4">
+    <thead>
+      <tr>
+        <th>Texto</th>
+        <th>ID Usuario</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let notificacion of notificaciones; let i = index">
+        <td>{{ notificacion.texto }}</td>
+        <td>{{ notificacion.id_usuario }}</td>
+        <td>
+          <button (click)="editarNotificacion(i)" class="btn btn-warning">Editar</button>
+          <button (click)="eliminarNotificacion(i)" class="btn btn-danger">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
