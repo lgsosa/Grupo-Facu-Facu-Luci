@@ -16,8 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './service/auth.service'; 
 import { RoleGuard } from './guards/role.guard';
-import { NotificacionesComponent } from './pages/notificaciones/notificaciones.component';   
-
+import { NotificacionesComponent } from './pages/notificaciones/notificaciones.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +31,7 @@ import { NotificacionesComponent } from './pages/notificaciones/notificaciones.c
     LibroComponent,
     LoginComponent,
     ListaLibrosEstrellasComponent,
-    NotificacionesComponent
+    NotificacionesComponent,
   ],
   imports: [
     BrowserModule,

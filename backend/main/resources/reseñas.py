@@ -1,4 +1,3 @@
-from .valoracion import valoraciones
 from .comentarios import comentarios
 from .libro import LIBROS
 from main.models import ReseñasModel

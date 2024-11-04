@@ -1,36 +1,50 @@
 <app-nav></app-nav>
-<div class="container mt-5" *ngIf="libros && libros.length > 0">
-  <!-- Recorre la lista de libros -->
-  <div *ngFor="let libro of getPaginatedLibros()" class="book-detail">
-    <div class="book-cover">
-      <img [src]="libro.image" alt="{{ libro.title }}" style="width: 200px; height: auto; margin-left: 150px;">
-    </div>
-    <div class="book-info"> 
-      <h2>{{ libro.title }}</h2>
-      <!-- Mostrar estrellas -->
-      <div class="stars">
-        <span *ngFor="let star of libro.stars">{{ star }}</span>
-      </div>
-      <div class="synopsis">
-        <h4>Sinopsis</h4>
-        <p>{{ libro.synopsis }}</p> <!-- Esto debería mostrar la sinopsis -->
-      </div>
-    </div>
+<div class="container">
+  <h2 class="text-center">Selector de Libros</h2>
 
-    <!-- Comentarios -->
-    <div class="comments mt-3">
-      <h4>Comentarios</h4>
-      <ul class="list-group">
-        <li *ngFor="let comentario of libro.comentarios" class="list-group-item">
-          {{ comentario }}
-        </li>
-      </ul>
+  <div class="filter-bar">
+    <input type="text" class="form-control" placeholder="Buscar libro">
+    <div class="settings-icon">
+      <img src="https://cdn-icons-png.flaticon.com/512/3524/3524639.png" alt="Configuración" class="config-img">
     </div>
   </div>
-</div>
 
-<!-- Paginación -->
-<div class="pagination mt-3">
-  <button class="btn btn-secondary" (click)="previousPage()">←</button>
-  <button class="btn btn-secondary" (click)="nextPage()">Next →</button>
-</div>
+  <div class="book-grid">
+    <div class="book" *ngFor="let libro of libros">
+      <img [src]="libro.imagen" [alt]="libro.titulo">
+      <div class="title">{{ libro.titulo }}</div>
+      <div class="stars">{{ libro.nuevaValoracion }}</div>
+
+      <form (ngSubmit)="agregarValoracion(libro)">
+        <div>
+          <label for="valoracion">Valoración (1 a 5): </label>
+          <select [(ngModel)]="libro.nuevaValoracion" name="valoracion" required>
+            <option *ngFor="let star of [1, 2, 3, 4, 5]" [value]="star">{{ star }}</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Agregar Valoración</button>
+      </form>
+    </div>
+  </div>
+
+  <h3 class="text-center mt-4">Valoraciones</h3>
+  <table class="table mt-3">
+    <thead>
+      <tr>
+        <th>Nombre del Libro</th>
+        <th>Valoración</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let valoracion of valoraciones">
+        <td>{{ valoracion.nombre_del_libro }}</td>
+        <td>{{ valoracion.valoracion }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pagination mt-3 text-center">
+    <button class="btn btn-secondary" (click)="previousPage()" [disabled]="currentPage === 1">← Anterior</button>
+    <button class="btn btn-secondary" (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente →</button>
+  </div>
+  
