@@ -11,27 +11,22 @@ class Notificaciones(db.Model):
     usuario = db.relationship("Usuario", back_populates="notificaciones")
 
     def to_json_short(self):
-        notificaciones_json = {
+        return {
             "id": self.id,
             "notificacion": self.notificacion
         }
-        return notificaciones_json
 
     def to_json(self):
-        notificaciones_json = {
+        return {
             "id": self.id,
             "notificacion": self.notificacion,
             "usuario": self.usuario.to_json() if self.usuario else None
         }
-        return notificaciones_json
 
     @staticmethod
     def from_json(notificacion_json):
-        id = notificacion_json.get('id')
-        notificacion = notificacion_json.get('notificacion')
-        id_usuario = notificacion_json.get('id_usuario')
         return Notificaciones(
-            id=id,
-            notificacion=notificacion,
-            id_usuario=id_usuario
+            id=notificacion_json.get('id'),
+            notificacion=notificacion_json.get('notificacion'),
+            id_usuario=notificacion_json.get('id_usuario')
         )
